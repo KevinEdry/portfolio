@@ -1,16 +1,12 @@
-<script>
+<script lang="ts">
     import "../app.css";
     import Typewriter from 'svelte-typewriter'
+	import Menu from "$lib/menu/menu.svelte";
 </script>
 
-<div class="flex flex-row font-roboto">
-    <nav class="w-1/12">
-        <ul>
-            <li>about</li>
-            <li>projects</li>
-            <li>blog</li>
-            <li>contact</li>
-        </ul>
+<div class="flex flex-row font-roboto min-h-full h-full">
+    <nav class="flex flex-col w-1/12 h-full justify-end pb-10">
+        <Menu />
     </nav>
     <section>
         <Typewriter mode="loop" cursor={false} interval={100} delay={5000}>
