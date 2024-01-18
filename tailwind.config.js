@@ -10,6 +10,9 @@ export default {
 			vrl: 'writing-mode-vrl'
 		},
 		extend: {
+			backgroundImage: {
+				hero: "url('background.png')"
+			},
 			fontFamily: {
 				roboto: ['Roboto']
 			}
