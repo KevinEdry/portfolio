@@ -10,7 +10,7 @@ export default function Menu() {
   return (
     <ul className="flex flex-col items-center h-fit gap-14">
       <LayoutGroup id="underline">
-        <MenuItem active={route === "/"} name="about" route="/"/>
+        <MenuItem active={route === "/about"} name="about" route="/about"/>
         <MenuItem active={route === "/projects"} name="projects" route="/projects"/>
         <MenuItem active={route === "/blog"} name="blog" route="/blog"/>
         <MenuItem active={route === "/contact"} name="contact" route="/contact"/>

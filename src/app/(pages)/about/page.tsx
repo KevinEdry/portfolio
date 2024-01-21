@@ -1,19 +1,15 @@
 import Signature from '~/public/icons/signature.svg';
-import TwitterIcon from '~/public/icons/social/twitter.svg';
-import GithubIcon from '~/public/icons/social/github.svg';
-import MediumIcon from '~/public/icons/social/medium.svg';
-import LinkedinIcon from '~/public/icons/social/linkedin.svg';
 import Image from 'next/image';
+import React from 'react';
+import Social from '~/components/social/social';
 
 export default function About() {
   return (
-    <section className="flex">
-        <div className="w-1/2">
+    <React.Fragment>
+        <div className="w-1/2 h-[80%]">
             <Image width={552} height={630} src="/images/avatar.png" alt="avatar" className='rounded-lg' />
-            <div className='w-8'>
-            </div>
         </div>
-        <div className="w-1/2 flex flex-col gap-8">
+        <div className="w-1/2 flex flex-col gap-4 h-[80%]">
             <hr className="text-primary w-40"/>
             <div className="flex flex-col gap-3">
                 <h1 className="text-4xl font-black">Kevin Edry</h1>
@@ -25,15 +21,15 @@ export default function About() {
                 <p>I have been privileged to be a part of several accelerator programs that have significantly contributed to my professional growth. These include AWS Floor 28 Builder Space, Fusion LA, and Facebook for Startups. Participation in these programs has not only broadened my network and knowledge base but also sharpened my skills in various aspects of technology and business leadership.</p>
                 <p>Driven by a commitment to innovation and leveraging the latest in technology to create efficient, automated systems, I am dedicated to contributing to a leading tech company. With my extensive management experience and a proven track record in the tech industry, I am poised to enhance any suite of platforms, particularly in the realm of enterprise SaaS models.</p>
             </div>
-            <Signature />
+            <Signature/>
             <ul className="flex gap-8">
-                <li><TwitterIcon/></li>
-                <li><GithubIcon/></li>
-                <li><MediumIcon/></li>
-                <li><LinkedinIcon/></li>
+              <Social platform='linkedin' link='https://www.linkedin.com/in/kevinedry/' />
+              <Social platform='github' link='https://github.com/KevinEdry' />
+              <Social platform='medium' link='https://medium.com/@techg9' />
+              <Social platform='twitter' link='https://twitter.com/KevinEdry' />
             </ul>
         </div>
         
-    </section>
+    </React.Fragment>
   );
 }
