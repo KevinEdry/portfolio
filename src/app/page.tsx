@@ -10,8 +10,6 @@ export default function About() {
     <section className="flex">
         <div className="w-1/2">
             <Image width={552} height={630} src="/images/avatar.png" alt="avatar" className='rounded-lg' />
-            <div className='w-8'>
-            </div>
         </div>
         <div className="w-1/2 flex flex-col gap-8">
             <hr className="text-primary w-40"/>

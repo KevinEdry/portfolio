@@ -9,7 +9,7 @@ import NavigationArrow from "~/components/navigation-arrow/navigation-arrow";
 
 export const metadata = {
   title: "Kevin Edry's Portfolio",
-  description: "Crafted with <3 in Seattle.",
+  description: "Crafted with ❤️ in Seattle.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Image src="/images/background.png" alt="Seattle" layout="fill" objectFit="cover" objectPosition="center" className="-z-10"/>
-        <div className="flex flex-row font-roboto min-h-full h-full bg-hero bg-cover text-text overflow-hidden">
+        <div className="container mx-auto flex flex-row font-roboto min-h-full h-full bg-cover text-text overflow-hidden">
           <nav className="flex flex-col w-1/12 h-full justify-center pb-10">
               <Menu />
           </nav>
