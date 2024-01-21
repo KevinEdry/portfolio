@@ -17,10 +17,15 @@ export default function NavigationArrow(props: { direction: "right" | "left" }) 
         if(currentRouteIndex === -1) {
             throw new Error("could not find next route");
         }
-
+        
         const nextRouteIndex = currentRouteIndex + navigationDirection;
         const routeIndex = nextRouteIndex >= routerArray.length ? 0 : nextRouteIndex < 0 ? routerArray.length -1 : nextRouteIndex;
-        router.push(routerArray[routeIndex]);
+        const nextPathname = routerArray[routeIndex];
+        
+        if(nextPathname == null) {
+            throw new Error("could not find next route");
+        }
+        router.push(nextPathname);
     }
 
   return (

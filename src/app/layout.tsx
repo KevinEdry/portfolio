@@ -1,6 +1,8 @@
 import "~/styles/globals.css";
 import "~/styles/reset.css";
 
+import Image from "next/image";
+
 import Menu from "~/components/menu/menu";
 import HeroTitle from "~/components/hero-title/hero-title";
 import NavigationArrow from "~/components/navigation-arrow/navigation-arrow";
@@ -19,20 +21,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <Image src="/images/background.png" alt="Seattle" layout="fill" objectFit="cover" objectPosition="center" className="-z-10"/>
         <div className="flex flex-row font-roboto min-h-full h-full bg-hero bg-cover text-text overflow-hidden">
           <nav className="flex flex-col w-1/12 h-full justify-center pb-10">
               <Menu />
           </nav>
           <main className="flex flex-col w-full h-full">
               <section className="h-1/6 flex items-center w-full">
-                  {/* <Typewriter mode="loop" cursor={false} interval={100}>
-                      <HeroTitle>Hello, I'm Kevin 👋.</HeroTitle>
-                      <HeroTitle>नमस्ते, मैं केविन हूं। 🙏</HeroTitle>
-                      <HeroTitle>你好，我是凯文 🙌。</HeroTitle>
-                      <HeroTitle>Hola, soy Kevin ✨.</HeroTitle>
-                      <HeroTitle>こんにちは、ケビンです ✌️。</HeroTitle>
-                      <HeroTitle>אהלן, אני קווין 👌.</HeroTitle>
-                  </Typewriter> */}
+                <HeroTitle />
               </section>
               {children}
           </main>
