@@ -36,7 +36,7 @@ export default function PageTransitionLayout({
   const { direction } = useContext(NavigationContext);
 
   return (
-    <div className="container flex h-full min-h-full flex-row overflow-hidden bg-cover font-roboto text-text">
+    <div className="container mx-auto flex h-full min-h-full flex-row overflow-hidden bg-cover font-roboto text-text">
       <LayoutGroup id="hero">
         {inSplashScreen ? (
           children
