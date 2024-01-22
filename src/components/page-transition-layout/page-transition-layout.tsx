@@ -36,7 +36,7 @@ export default function PageTransitionLayout({
     const { direction } = useContext(NavigationContext);
 
   return (
-    <div className="container mx-auto flex flex-row font-roboto min-h-full h-full bg-cover text-text overflow-hidden">
+    <div className="container flex flex-row font-roboto min-h-full h-full bg-cover text-text overflow-hidden">
         <LayoutGroup id="hero">
         {
             inSplashScreen ? 
@@ -45,9 +45,11 @@ export default function PageTransitionLayout({
             <React.Fragment>
                 <Menu />
                 <main className="flex flex-col w-full h-full">
-                <motion.div layoutId='hero' animate className="h-1/6 flex items-center w-full">
-                    <HeroTitle />
-                </motion.div>
+                    <div className="h-1/6 flex items-center">
+                        <motion.div layoutId='hero' animate>
+                            <HeroTitle />
+                        </motion.div>
+                    </div>
                 <PageAnimatePresence>
                     <motion.section variants={variants} initial={direction === "up" ? "down" : direction === "down" ? "up" : "splash"}
                                     animate={{ y: 0, opacity: 1}}

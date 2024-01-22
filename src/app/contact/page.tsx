@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export default function About() {
+export default function Contact() {
   return (
     <React.Fragment>
         Contact Page

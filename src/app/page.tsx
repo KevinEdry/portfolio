@@ -8,14 +8,16 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 
-export default function About() {
+export default function Splash() {
   return (
     <div className='flex flex-col w-full'>
-      <div className='flex flex-col h-full w-full items-center justify-center'>
+      <div className='flex flex-col h-full items-center justify-center'>
         <div className='flex flex-col items-center gap-4'>
-          <motion.div layoutId='hero' animate>
-            <HeroTitle />
-          </motion.div>
+          <div className='w-full'>
+            <motion.div layoutId='hero' animate>
+              <HeroTitle />
+            </motion.div>
+          </div>
           <hr className="text-primary w-40"/>
           <p className="text-text/40">Senior Engineering Manager</p>
           <Link href={"/about"} className='pt-5'>

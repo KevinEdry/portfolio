@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export default function About() {
+export default function Blog() {
   return (
     <React.Fragment>
         Blog Page
