@@ -14,7 +14,7 @@ export default function Splash() {
         <div className="flex flex-col items-center gap-4">
           <div className="w-full">
             <motion.div layoutId="hero" animate>
-              <HeroTitle centered />
+              <HeroTitle />
             </motion.div>
           </div>
           <hr className="w-40 text-primary" />
