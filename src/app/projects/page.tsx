@@ -1,3 +1,5 @@
+"use client";
+
 import Signature from '~/public/icons/signature.svg';
 import Image from 'next/image';
 import React from 'react';
@@ -6,10 +8,8 @@ import Social from '~/components/social/social';
 export default function About() {
   return (
     <React.Fragment>
-        <div className="w-1/2 h-[80%]">
-            <Image width={552} height={630} src="/images/avatar.png" alt="avatar" className='rounded-lg' />
-        </div>
-        <div className="w-1/2 flex flex-col gap-4 h-[80%]">
+
+        <div className="flex flex-col gap-4 h-[80%]">
             <hr className="text-primary w-40"/>
             <div className="flex flex-col gap-3">
                 <h1 className="text-4xl font-black">Kevin Edry</h1>
