@@ -3,9 +3,9 @@
 import { clsx } from "clsx";
 import { TypeAnimation } from "react-type-animation";
 
-export default function HeroTitle({ centered = false }: { centered: boolean }) {
+export default function HeroTitle() {
   return (
-    <div className={clsx("w-[850px]", centered && "text-center")}>
+    <div className={clsx("w-fit")}>
       <h1 className="font-roboto text-6xl font-black text-text">
         <TypeAnimation
           sequence={[
