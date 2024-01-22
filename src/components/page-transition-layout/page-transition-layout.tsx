@@ -15,61 +15,70 @@ export default function PageTransitionLayout({
 }: {
   children: React.ReactNode;
 }) {
-    const pathname = usePathname();
-    const inSplashScreen = pathname === "/";
+  const pathname = usePathname();
+  const inSplashScreen = pathname === "/";
 
-    const variants = {
-        splash: {
-            opacity: 0,
-            y: 0
-        },
-        up: {
-            y: 300, 
-            opacity: 0
-        },
-        down: {
-            y: -300, 
-            opacity: 0
-        }
-    }
+  const variants = {
+    splash: {
+      opacity: 0,
+      y: 0,
+    },
+    up: {
+      y: 300,
+      opacity: 0,
+    },
+    down: {
+      y: -300,
+      opacity: 0,
+    },
+  };
 
-    const { direction } = useContext(NavigationContext);
+  const { direction } = useContext(NavigationContext);
 
   return (
-    <div className="container flex flex-row font-roboto min-h-full h-full bg-cover text-text overflow-hidden">
-        <LayoutGroup id="hero">
-        {
-            inSplashScreen ? 
-            children
-            :
-            <React.Fragment>
-                <Menu />
-                <main className="flex flex-col w-full h-full">
-                    <div className="h-1/6 flex items-center">
-                        <motion.div layoutId='hero' animate>
-                            <HeroTitle />
-                        </motion.div>
-                    </div>
-                <PageAnimatePresence>
-                    <motion.section variants={variants} initial={direction === "up" ? "down" : direction === "down" ? "up" : "splash"}
-                                    animate={{ y: 0, opacity: 1}}
-                                    exit={direction}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 260,
-                                        damping: 20,
-                                    }} className="flex items-center h-full">
-                        {children}
-                    </motion.section>
-                </PageAnimatePresence>
-                </main>
-                <div className="flex flex-col absolute right-0 bottom-32">
-                    <NavigationArrow direction="up"/>
-                    <NavigationArrow direction="down"/>
-                </div>
-            </React.Fragment>
-        }
-    </LayoutGroup>
+    <div className="container flex h-full min-h-full flex-row overflow-hidden bg-cover font-roboto text-text">
+      <LayoutGroup id="hero">
+        {inSplashScreen ? (
+          children
+        ) : (
+          <React.Fragment>
+            <Menu />
+            <main className="flex h-full w-full flex-col">
+              <div className="flex h-1/6 items-center">
+                <motion.div layoutId="hero" animate>
+                  <HeroTitle />
+                </motion.div>
+              </div>
+              <PageAnimatePresence>
+                <motion.section
+                  variants={variants}
+                  initial={
+                    direction === "up"
+                      ? "down"
+                      : direction === "down"
+                        ? "up"
+                        : "splash"
+                  }
+                  animate={{ y: 0, opacity: 1 }}
+                  exit={direction}
+                  transition={{
+                    type: "spring",
+                    stiffness: 260,
+                    damping: 20,
+                  }}
+                  className="flex h-full items-center"
+                >
+                  {children}
+                </motion.section>
+              </PageAnimatePresence>
+            </main>
+            <div className="absolute bottom-32 right-0 flex flex-col">
+              <NavigationArrow direction="up" />
+              <NavigationArrow direction="down" />
+            </div>
+          </React.Fragment>
+        )}
+      </LayoutGroup>
     </div>
   );
 }
