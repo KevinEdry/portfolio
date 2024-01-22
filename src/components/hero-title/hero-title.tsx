@@ -5,7 +5,7 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function HeroTitle() {
   return (
-    <div className={clsx("w-[800px]")}>
+    <div className={clsx("w-[900px]")}>
       <h1 className="font-roboto text-6xl font-black text-text">
         <TypeAnimation
           sequence={[
