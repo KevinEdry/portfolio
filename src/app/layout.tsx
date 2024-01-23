@@ -4,6 +4,7 @@ import "~/styles/reset.css";
 import Image from "next/image";
 import React from "react";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import PageTransitionLayout from "~/components/page-transition-layout/page-transition-layout";
 import { AppProviders } from "~/providers/AppProviders";
@@ -34,6 +35,7 @@ export default function RootLayout({
           <PageTransitionLayout>{children}</PageTransitionLayout>
         </AppProviders>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
