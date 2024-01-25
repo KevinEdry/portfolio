@@ -91,8 +91,8 @@ export default function PageTransitionLayout({
         </p>
         <div className="text-6xl">😂</div>
         <div className="mt-auto text-center text-text/70">
-          I just didn't have the time to implement it, I actually like tweaking
-          CSS all day.
+          I just didn&apos;t have the time to implement it, I actually like
+          tweaking CSS all day.
         </div>
       </div>
     </React.Fragment>
