@@ -1,5 +1,3 @@
-"use client";
-
 import Signature from "~/public/icons/signature.svg";
 import Image from "next/image";
 import React from "react";
