@@ -11,6 +11,8 @@ export default function Blog() {
         <HeroArticle
           title="Why SCRUM is a myth"
           readTime={300}
+          image="/images/article1.webp"
+          link="https://medium.com/@techg9/why-scrum-is-a-myth-46f34b2fe16d"
           publishedAt={new Date()}
           summary="At some point, every technical leader faces the challenge of deciding on the best project management framework for their development team. The options are somewhat limited if reinventing the wheel isn’t on your agenda (I’m looking at you, Google) with the usual suspects — Agile, Waterfall, Kanban, and Scrum."
         />
