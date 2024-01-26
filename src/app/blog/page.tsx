@@ -17,28 +17,11 @@ export default function Blog() {
       </div>
       <div className="flex h-[80%] w-1/2 flex-col gap-4">
         <Article
-          title="Why SCRUM is a myth"
+          title="Gaming During Work: A Distraction Or A Means For Productivity?"
           publishedAt={new Date()}
-          link="https://kevin-edry.com/"
-          summary="At some point, every technical leader faces the challenge of deciding on the best project management framework for their development team. The options are somewhat limited if reinven..."
-        />
-        <Article
-          title="Why SCRUM is a myth"
-          publishedAt={new Date()}
-          link="https://kevin-edry.com/"
-          summary="At some point, every technical leader faces the challenge of deciding on the best project management framework for their development team. The options are somewhat limited if reinven..."
-        />
-        <Article
-          title="Why SCRUM is a myth"
-          publishedAt={new Date()}
-          link="https://kevin-edry.com/"
-          summary="At some point, every technical leader faces the challenge of deciding on the best project management framework for their development team. The options are somewhat limited if reinven..."
-        />
-        <Article
-          title="Why SCRUM is a myth"
-          publishedAt={new Date()}
-          link="https://kevin-edry.com/"
-          summary="At some point, every technical leader faces the challenge of deciding on the best project management framework for their development team. The options are somewhat limited if reinven..."
+          image="/images/article2.gif"
+          link="https://medium.com/@techg9/gaming-during-work-a-distraction-or-a-means-for-productivity-4fd25bd23060"
+          summary="Gaming, in general, is referred to as a hobby, something to do in your free time. It is often described as an unproductive activity that, in its core, is about wasting that valuable..."
         />
       </div>
     </React.Fragment>

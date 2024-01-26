@@ -7,11 +7,13 @@ export default function Article({
   title,
   publishedAt,
   link,
+  image,
   summary,
 }: {
   title: string;
   publishedAt: Date;
   link: string;
+  image: string;
   summary: string;
 }) {
   return (
@@ -20,7 +22,7 @@ export default function Article({
         <div className="h-full">
           <TintedImage
             alt="article image"
-            src="/images/article1.webp"
+            src={image}
             width={228}
             height={136}
           />
