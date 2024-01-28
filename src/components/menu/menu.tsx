@@ -42,9 +42,9 @@ export default function Menu() {
           <MotionMenuItem
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            active={route === "/projects"}
-            name="projects"
-            route="/projects"
+            active={route === "/books"}
+            name="books"
+            route="/books"
           />
           <MotionMenuItem
             initial={{ x: -200, opacity: 0 }}
