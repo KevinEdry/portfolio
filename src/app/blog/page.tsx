@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import HeroArticle from "~/components/about/article/hero-article";
-import Article from "~/components/about/article/article";
+import HeroArticle from "~/components/blog/article/hero-article";
+import Article from "~/components/blog/article/article";
 
 export default function Blog() {
   return (

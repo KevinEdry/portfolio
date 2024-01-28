@@ -16,9 +16,9 @@ export default function About() {
         />
       </div>
       <div className="flex h-[80%] w-1/2 flex-col gap-4">
-        <hr className="w-40 text-primary" />
         <div className="flex flex-col gap-3">
           <h1 className="text-4xl font-black">Kevin Edry</h1>
+          <hr className="w-28 text-primary" />
           <p className="text-text/40">Senior Engineering Manager</p>
         </div>
 
