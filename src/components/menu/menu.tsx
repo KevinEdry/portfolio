@@ -9,7 +9,7 @@ const MotionMenuItem = motion(MenuItem);
 export default function Menu() {
   const route = usePathname();
   return (
-    <nav className="flex h-full w-1/12 flex-col justify-center pb-10">
+    <nav className="flex h-3/4 w-1/12 flex-col items-baseline justify-center pb-10">
       <motion.ul
         initial="hidden"
         animate="show"
@@ -22,7 +22,7 @@ export default function Menu() {
             },
           },
         }}
-        className="flex h-fit flex-col items-center gap-14"
+        className="flex h-fit flex-col items-center gap-14 align-baseline"
       >
         <LayoutGroup id="underline">
           <MotionMenuItem

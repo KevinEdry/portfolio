@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import React, { useContext } from "react";
 import PageAnimatePresence from "~/ui/page-animation-presence/page-animation-presence";
 import { NavigationContext } from "~/providers/NavigationProvider";
+import Social from "../social/social";
 
 export default function PageTransitionLayout({
   children,
@@ -42,42 +43,59 @@ export default function PageTransitionLayout({
           {inSplashScreen ? (
             children
           ) : (
-            <React.Fragment>
-              <Menu />
-              <main className="flex h-full w-full flex-col">
-                <div className="flex h-1/6 items-center">
-                  <motion.div layoutId="hero" animate>
-                    <HeroTitle />
-                  </motion.div>
-                </div>
-                <PageAnimatePresence>
-                  <motion.section
-                    variants={variants}
-                    initial={
-                      direction === "up"
-                        ? "down"
-                        : direction === "down"
-                          ? "up"
-                          : "splash"
-                    }
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={direction}
-                    transition={{
-                      type: "spring",
-                      stiffness: 260,
-                      damping: 20,
-                    }}
-                    className="flex h-full items-center"
-                  >
-                    {children}
-                  </motion.section>
-                </PageAnimatePresence>
-              </main>
+            <div className="flex w-full flex-wrap">
+              <div className="flex h-1/6 min-w-full items-center justify-between">
+                <motion.div layoutId="hero" animate>
+                  <HeroTitle />
+                </motion.div>
+                <ul className="flex gap-8">
+                  <Social
+                    platform="linkedin"
+                    link="https://www.linkedin.com/in/kevinedry/"
+                  />
+                  <Social
+                    platform="github"
+                    link="https://github.com/KevinEdry"
+                  />
+                  <Social platform="medium" link="https://medium.com/@techg9" />
+                  <Social
+                    platform="twitter"
+                    link="https://twitter.com/KevinEdry"
+                  />
+                </ul>
+              </div>
+              <div className="flex h-full w-full">
+                <Menu />
+                <main className="flex h-full w-full flex-col">
+                  <PageAnimatePresence>
+                    <motion.section
+                      variants={variants}
+                      initial={
+                        direction === "up"
+                          ? "down"
+                          : direction === "down"
+                            ? "up"
+                            : "splash"
+                      }
+                      animate={{ y: 0, opacity: 1 }}
+                      exit={direction}
+                      transition={{
+                        type: "spring",
+                        stiffness: 260,
+                        damping: 20,
+                      }}
+                      className="flex h-full items-center"
+                    >
+                      {children}
+                    </motion.section>
+                  </PageAnimatePresence>
+                </main>
+              </div>
               <div className="absolute bottom-32 right-0 flex flex-col">
                 <NavigationArrow direction="up" />
                 <NavigationArrow direction="down" />
               </div>
-            </React.Fragment>
+            </div>
           )}
         </LayoutGroup>
       </div>
