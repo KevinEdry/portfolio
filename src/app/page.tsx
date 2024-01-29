@@ -6,6 +6,7 @@ import HeroTitle from "~/components/hero-title/hero-title";
 import Link from "next/link";
 
 import { motion } from "framer-motion";
+import Button from "~/ui/button/button";
 
 export default function Splash() {
   return (
@@ -20,9 +21,7 @@ export default function Splash() {
           <hr className="w-40 text-primary" />
           <p className="text-text/40">Senior Engineering Manager</p>
           <Link href={"/about"} className="pt-5">
-            <button className="h-10 w-32 rounded-md bg-primary font-bold hover:bg-primary/90">
-              ENTER
-            </button>
+            <Button>ENTER</Button>
           </Link>
         </div>
       </div>
