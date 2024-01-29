@@ -38,13 +38,13 @@ export default function PageTransitionLayout({
 
   return (
     <React.Fragment>
-      <div className="container mx-auto hidden h-full min-h-full flex-row overflow-hidden bg-cover font-roboto text-text sm:flex">
+      <div className="container mx-auto hidden h-screen max-h-full flex-row bg-cover font-roboto text-text sm:flex">
         <LayoutGroup id="hero">
           {inSplashScreen ? (
             children
           ) : (
-            <div className="flex w-full flex-wrap">
-              <div className="flex h-1/6 min-w-full items-center justify-between">
+            <div className="flex flex-1 flex-col">
+              <div className="flex h-1/6 w-full items-center justify-between">
                 <motion.div layoutId="hero" animate>
                   <HeroTitle />
                 </motion.div>
@@ -64,7 +64,7 @@ export default function PageTransitionLayout({
                   />
                 </ul>
               </div>
-              <div className="flex h-full w-full">
+              <div className="flex flex-1">
                 <Menu />
                 <main className="flex h-full w-full flex-col">
                   <PageAnimatePresence>
@@ -84,7 +84,7 @@ export default function PageTransitionLayout({
                         stiffness: 260,
                         damping: 20,
                       }}
-                      className="flex h-full items-center"
+                      className="flex h-full flex-1 items-center"
                     >
                       {children}
                     </motion.section>

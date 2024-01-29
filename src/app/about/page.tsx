@@ -21,7 +21,7 @@ export default function About() {
           <p className="text-text/40">Senior Engineering Manager</p>
         </div>
 
-        <div className="flex h-full w-full flex-col gap-6 text-sm">
+        <div className="flex w-full flex-col gap-6 text-sm">
           <p>
             Hello! I’m Kevin, a seasoned Engineering Manager based in Seattle,
             WA. With an extensive background in software engineering, I
