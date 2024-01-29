@@ -1,0 +1,72 @@
+[
+  {
+    "cover": "/images/books/20 Principle.png",
+    "author": "Richard Koch",
+    "description": "",
+    "title": "The 80/20 Principle: The Secret to Achieving More with Less",
+    "link": "https://a.co/d/hJfH9K4"
+  },
+  {
+    "cover": "/images/books/Multipliers.png",
+    "author": "Liz Wiseman",
+    "description": "",
+    "title": "Multipliers",
+    "link": "https://a.co/d/iQiN8pK"
+  },
+  {
+    "cover": "/images/books/The Mythical Man Month.png",
+    "author": "someone",
+    "description": "",
+    "title": "Mythical Man-Month, The: Essays on Software Engineering",
+    "link": "https://a.co/d/cDxUCPy"
+  },
+  {
+    "cover": "/images/books/Peopleware.png",
+    "author": "Tom DeMarco and Tim Lister",
+    "description": "",
+    "title": "Peopleware: Productive Projects and Teams",
+    "link": "https://a.co/d/dIhaksW"
+  },
+  {
+    "cover": "/images/books/Procrastinate on Purpose.png",
+    "author": "Rory Vaden",
+    "description": "",
+    "title": "Procrastinate on Purpose",
+    "link": "https://a.co/d/1TYcePO"
+  },
+  {
+    "cover": "/images/books/The Lean Startup.png",
+    "author": "Eric Ries",
+    "description": "",
+    "title": "The Lean Startup",
+    "link": "https://a.co/d/b4tzeVc"
+  },
+  {
+    "cover": "/images/books/Staff Engineer.png",
+    "author": "Will Larson",
+    "description": "",
+    "title": "Staff Engineer: Leadership Beyond the Management Track",
+    "link": "https://a.co/d/dyELzkN"
+  },
+  {
+    "cover": "/images/books/Clean Code.png",
+    "author": "Robert C. Martin",
+    "description": "",
+    "title": "Clean Code: A Handbook of Agile Software Craftsmanship",
+    "link": "https://a.co/d/2wtFwmT"
+  },
+  {
+    "cover": "/images/books/Atomic Habits.png",
+    "author": "James Clear",
+    "description": "",
+    "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+    "link": "https://a.co/d/2ODTbB3"
+  },
+  {
+    "cover": "/images/books/The Pragmatic Programmer.png",
+    "author": "David Thomas and Andrew Hunt",
+    "description": "",
+    "title": "The Pragmatic Programmer: Your Journey To Mastery",
+    "link": "https://a.co/d/e6Jotoq"
+  }
+]
