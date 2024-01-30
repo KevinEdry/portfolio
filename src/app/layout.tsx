@@ -32,6 +32,7 @@ export default function RootLayout({
             objectPosition="center"
             className="-z-10"
           />
+          <div className="absolute -z-10 h-full w-full bg-image/20"></div>
           <PageTransitionLayout>{children}</PageTransitionLayout>
         </AppProviders>
         <Analytics />

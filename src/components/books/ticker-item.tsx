@@ -4,13 +4,15 @@ export default function TickerItem({
   src,
   alt,
   index,
+  onClick,
 }: {
   src: string;
   alt: string;
   index: number;
+  onClick?: () => void;
 }) {
   return (
-    <li key={index}>
+    <li key={index} onClick={onClick}>
       <TintedImage src={src} alt={alt} height={253} width={158} />
     </li>
   );

@@ -2,28 +2,28 @@
   {
     "cover": "/images/books/20 Principle.png",
     "author": "Richard Koch",
-    "description": "",
+    "description": "\"The 80/20 Principle\" by Richard Koch resonates deeply with the concept of Chaos Theory, where small changes can have significant impacts. This book is a testament to the idea that most outcomes are determined by a minority of causes. As an engineering manager, I found this parallel quite enlightening. It taught me that often, a small portion of our efforts leads to the majority of our results, akin to how a minor change in a chaotic system can lead to disproportionately large effects.\n\nBut this book isn’t confined to the realms of business and management alone. Its principles are profoundly applicable to everyday life. Koch delves into how this principle can be observed in various aspects of personal life, from relationships to personal finance, and even health. The realization that a few key actions can lead to substantial improvements in quality of life is empowering. ",
     "title": "The 80/20 Principle: The Secret to Achieving More with Less",
     "link": "https://a.co/d/hJfH9K4"
   },
   {
     "cover": "/images/books/Multipliers.png",
     "author": "Liz Wiseman",
-    "description": "",
-    "title": "Multipliers",
+    "description": "As an engineering manager, each page of \"Multipliers: How the Best Leaders Make Everyone Smarter\" by Liz Wiseman was like holding up a mirror to my own leadership style. The book's exploration of 'Multipliers' and 'Diminishers' compelled me to constantly compare and contrast these styles with my own practices. With every chapter, I found myself reflecting on past scenarios and decisions, identifying moments where I was a Multiplier, amplifying my team's abilities, and, frankly, times when I inadvertently played the Diminisher, stifling their potential.\n\nFor me, \"Multipliers\" wasn't just a book; it became a catalyst for redefining my role as an engineering manager, emphasizing the power of enabling others over merely directing them.",
+    "title": "Multipliers: How the Best Leaders Make Everyone Smarter",
     "link": "https://a.co/d/iQiN8pK"
   },
   {
     "cover": "/images/books/The Mythical Man Month.png",
-    "author": "someone",
-    "description": "",
+    "author": "Frederick Brooks Jr.",
+    "description": "\"The Mythical Man-Month\" by Fred Brooks is a classic in the world of software engineering, offering timeless insights that have remained relevant over the decades. As an engineering manager myself, I found the essays particularly resonant, especially the concepts of the \"man-month\" and Brooks' Law. The idea that adding manpower to a late software project only makes it later was a real eye-opener for me. It challenged some of my preconceived notions about project management and helped me approach my team's workflow more effectively. Brooks' candid discussions on the joys and woes of software engineering are both enlightening and relatable. Whether you're a seasoned engineer or just starting out, this book offers valuable perspectives on the complexities of software project management. It's a must-read for anyone in the field, providing lessons that are as applicable today as they were when the book was first published.",
     "title": "Mythical Man-Month, The: Essays on Software Engineering",
     "link": "https://a.co/d/cDxUCPy"
   },
   {
     "cover": "/images/books/Peopleware.png",
     "author": "Tom DeMarco and Tim Lister",
-    "description": "",
+    "description": "I can't help but share my enthusiasm for \"Peopleware\" by Tom DeMarco and Timothy Lister. This book is a hidden gem, and one section that really resonated with me is the chapter on \"The Human Factor.\" DeMarco and Lister's insights on understanding the psychology of team dynamics and the importance of team morale have been a game-changer for me in my role as an engineering manager.\n\n\"Peopleware\" isn't your typical management book; it's a guide to understanding and optimizing the human side of software development. The authors provide practical advice on creating a productive and harmonious work environment, and their emphasis on the human factor has made a significant impact on how I lead my team.\n\nWhether you're an engineering manager like me or simply looking to improve team dynamics, \"Peopleware\" offers timeless wisdom that goes beyond technical skills. It's a book that deserves a spot on every manager's shelf.",
     "title": "Peopleware: Productive Projects and Teams",
     "link": "https://a.co/d/dIhaksW"
   },
@@ -31,7 +31,7 @@
     "cover": "/images/books/Procrastinate on Purpose.png",
     "author": "Rory Vaden",
     "description": "",
-    "title": "Procrastinate on Purpose",
+    "title": "Procrastinate on Purpose: 5 Permissions to Multiply Your Time",
     "link": "https://a.co/d/1TYcePO"
   },
   {
@@ -58,7 +58,7 @@
   {
     "cover": "/images/books/Atomic Habits.png",
     "author": "James Clear",
-    "description": "",
+    "description": "I found \"Atomic Habits\" by James Clear to be a game-changer. In particular, the section on \"The Power of Tiny Changes\" had a profound impact on me. Clear's insights on the compounding effect of small actions changed the way I approach personal development. This book is a practical guide to building good habits and breaking bad ones, focusing on small, consistent actions that lead to significant improvements. Whether you're striving for better health, productivity, or personal growth in general, \"Atomic Habits\" is a must-read.",
     "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
     "link": "https://a.co/d/2ODTbB3"
   },

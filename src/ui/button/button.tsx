@@ -6,7 +6,7 @@ export default function Button(props: {
   return (
     <button
       onClick={onClick}
-      className="h-10 w-32 rounded-md bg-primary font-bold hover:bg-primary/90"
+      className="h-10 px-10 rounded-md bg-primary font-bold hover:bg-primary/90"
     >
       {children}
     </button>
