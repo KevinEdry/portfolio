@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useAnimate, AnimationPlaybackControls } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import React, { useEffect } from "react";
 import { useMeasure } from "react-use";
 
 export default function Ticker({
@@ -15,38 +15,35 @@ export default function Ticker({
   pause: boolean;
   children?: React.ReactNode;
 }) {
-  const [scope, animate] = useAnimate();
+  const controls = useAnimation();
   const [ref, { height }] = useMeasure<HTMLUListElement>();
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const startAnimation = () => {
+    void controls.start({
+      y: direction === "down" ? 0 : (height / 2) * -1,
+      transition: {
+        duration: duration,
+        ease: "linear",
+        repeat: Infinity,
+      },
+    });
+  };
   useEffect(() => {
     if (height !== 0) {
+      startAnimation();
       if (pause) {
-        animate(scope.current, {
-          y: direction === "down" ? 0 : (height / 2) * -1,
-          transition: {
-            duration: duration,
-            ease: "linear",
-            repeat: Infinity,
-          },
-        }).pause();
-      } else {
+        void controls.stop();
       }
     }
-  });
+  }, [pause, height, startAnimation, controls]);
 
   return (
     <React.Fragment>
       {height !== 0 ? (
         <motion.div
-          ref={scope}
-          animate={{
-            y: direction === "down" ? 0 : (height / 2) * -1,
-            transition: {
-              duration: duration,
-              ease: "linear",
-              repeat: Infinity,
-            },
-          }}
+          animate={controls}
+          className="w-fit"
           initial={{ y: direction === "down" ? (height / 2) * -1 : 0 }}
         >
           <ul className="flex flex-col gap-10">

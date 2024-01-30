@@ -31,7 +31,7 @@ export default function Books() {
   const [currentBook, changeCurrentBook] = useState(firstBook);
 
   const element = (hovered: boolean) => (
-    <div className="gradient-mask-t-80-d absolute flex h-full w-full gap-5 overflow-hidden">
+    <div className="gradient-mask-t-80-d absolute flex h-full w-fit gap-5 overflow-hidden">
       {chunkify(books, 3).map((booksArray, index) => (
         <Ticker
           direction={index === 1 ? "down" : "up"}
