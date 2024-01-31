@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 import Menu from "~/components/menu/menu";
 import HeroTitle from "~/components/hero-title/hero-title";
@@ -38,16 +38,56 @@ export default function PageTransitionLayout({
                 <HeroTitle />
               </motion.div>
               <ul className="flex gap-8">
-                <Social
-                  platform="linkedin"
-                  link="https://www.linkedin.com/in/kevinedry/"
-                />
-                <Social platform="github" link="https://github.com/KevinEdry" />
-                <Social platform="medium" link="https://medium.com/@techg9" />
-                <Social
-                  platform="twitter"
-                  link="https://twitter.com/KevinEdry"
-                />
+                <AnimatePresence>
+                  <Social
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 0,
+                      },
+                    }}
+                    platform="linkedin"
+                    link="https://www.linkedin.com/in/kevinedry/"
+                  />
+                  <Social
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 0.1,
+                      },
+                    }}
+                    platform="github"
+                    link="https://github.com/KevinEdry"
+                  />
+                  <Social
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 0.2,
+                      },
+                    }}
+                    platform="medium"
+                    link="https://medium.com/@techg9"
+                  />
+                  <Social
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{
+                      opacity: 1,
+                      x: 0,
+                      transition: {
+                        delay: 0.3,
+                      },
+                    }}
+                    platform="twitter"
+                    link="https://twitter.com/KevinEdry"
+                  />
+                </AnimatePresence>
               </ul>
             </div>
             <div className="flex flex-1">

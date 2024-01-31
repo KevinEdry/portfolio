@@ -78,7 +78,7 @@ export default function Books() {
             <h1 className="text-2xl font-bold">{currentBook.title}</h1>
             <h4 className="font-light">{currentBook.author}</h4>
             <hr className="w-40 text-primary" />
-            <p className="whitespace-pre-line text-sm text-text-secondary">
+            <p className="text-md whitespace-pre-line leading-6 text-text-secondary">
               {currentBook.description}
             </p>
           </div>
