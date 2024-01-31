@@ -19,7 +19,11 @@ const MenuItem = forwardRef<
   const pathname = usePathname();
 
   return (
-    <li ref={ref} className="flex h-full flex-1 cursor-pointer gap-1 opacity-0">
+    <li
+      key={`MenuItem_${name}`}
+      ref={ref}
+      className="flex h-full flex-1 cursor-pointer gap-1 opacity-0"
+    >
       <Link
         href={route}
         onClick={() => {

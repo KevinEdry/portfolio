@@ -1,4 +1,8 @@
-import { type ReactNode, createContext, useState } from "react";
+"use client";
+
+import { type ReactNode, createContext, useState, useEffect } from "react";
+import { useDebounce, useMouseWheel } from "react-use";
+import { usePathname, useRouter } from "next/navigation";
 
 type NavigationDirection = "splash" | "up" | "down";
 
@@ -10,8 +14,30 @@ export const NavigationContext = createContext({
 });
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
+  const router = useRouter();
+  const pathname = usePathname();
+
   const [direction, setDirection] = useState<NavigationDirection>("splash");
   const routerArray = ["/", "/blog", "/books", "/contact"];
+
+  const mouseWheel = useMouseWheel();
+  const [mouseWheelYDelta, updateMouseWheelYDelta] =
+    useState<number>(mouseWheel);
+
+  useDebounce(
+    () => {
+      if (mouseWheel > mouseWheelYDelta) {
+        setDirection("down");
+        router.push(getNextPath(pathname));
+      } else if (mouseWheel < mouseWheelYDelta) {
+        setDirection("up");
+        router.push(getPrevPath(pathname));
+      }
+      updateMouseWheelYDelta(mouseWheel);
+    },
+    100,
+    [mouseWheel],
+  );
 
   function setAnimationDirection(current: string, next: string) {
     const nextPathIndex = routerArray.findIndex((path) => path === next);
@@ -26,6 +52,44 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     } else {
       setDirection("up");
     }
+  }
+
+  function getNextPath(current: string): string {
+    const currentPathIndex = routerArray.findIndex((path) => path === current);
+
+    if (currentPathIndex === -1) {
+      throw new Error("could not find current pathname index.");
+    }
+
+    const nextPathname =
+      currentPathIndex + 1 >= routerArray.length
+        ? routerArray[0]
+        : routerArray[currentPathIndex + 1];
+
+    if (nextPathname == null) {
+      throw new Error("could not find next pathname");
+    }
+
+    return nextPathname;
+  }
+
+  function getPrevPath(current: string): string {
+    const currentPathIndex = routerArray.findIndex((path) => path === current);
+
+    if (currentPathIndex === -1) {
+      throw new Error("could not find current pathname index.");
+    }
+
+    const nextPathname =
+      currentPathIndex - 1 < 0
+        ? routerArray[routerArray.length - 1]
+        : routerArray[currentPathIndex - 1];
+
+    if (nextPathname == null) {
+      throw new Error("could not find next pathname");
+    }
+
+    return nextPathname;
   }
 
   return (
