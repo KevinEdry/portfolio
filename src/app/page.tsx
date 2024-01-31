@@ -21,7 +21,7 @@ export default function Splash() {
           <hr className="w-40 text-primary" />
           <p className="text-text/40">Senior Engineering Manager</p>
           <Link href={"/about"} className="pt-5">
-            <Button>ENTER</Button>
+            <Button type="solid">ENTER</Button>
           </Link>
         </div>
       </div>

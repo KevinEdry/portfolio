@@ -1,12 +1,19 @@
+import clsx from "clsx";
+
 export default function Button(props: {
+  type: "solid" | "outline";
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   children: React.ReactNode;
 }) {
-  const { onClick, children } = props;
+  const { type, onClick, children } = props;
   return (
     <button
       onClick={onClick}
-      className="h-10 px-10 rounded-md bg-primary font-bold hover:bg-primary/90"
+      className={clsx(
+        "h-10 rounded-md  px-10 font-bold transition-all hover:bg-primary/90",
+        type === "solid" && "bg-primary",
+        type === "outline" && "border border-primary",
+      )}
     >
       {children}
     </button>

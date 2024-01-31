@@ -58,27 +58,31 @@ export default function Books() {
 
   return (
     <React.Fragment>
-      <div className="relative h-full max-h-full min-h-full w-1/2">
+      <div className="relative h-full max-h-full min-h-full w-5/12">
         {tickers}
       </div>
-      <div className="flex w-1/2 flex-col items-center justify-center gap-4 pb-5">
-        <Image
-          src={currentBook.cover}
-          alt={currentBook.title}
-          width={200}
-          height={336}
-        />
-        <div className="w-full text-center">
-          <h1 className="text-2xl font-bold">{currentBook.title}</h1>
-          <h4 className="font-light">{currentBook.author}</h4>
+      <div className="items-left flex w-7/12 flex-col justify-center gap-4 pb-5">
+        <div className="flex w-full gap-5">
+          <div className="flex w-fit flex-col gap-5">
+            <Image
+              src={currentBook.cover}
+              alt={currentBook.title}
+              width={200}
+              height={336}
+            />
+            <Link href={currentBook.link} target="_blank">
+              <Button type="outline">Amazon</Button>
+            </Link>
+          </div>
+          <div className="flex flex-1 flex-col gap-3">
+            <h1 className="text-2xl font-bold">{currentBook.title}</h1>
+            <h4 className="font-light">{currentBook.author}</h4>
+            <hr className="w-40 text-primary" />
+            <p className="whitespace-pre-line text-sm text-text-secondary">
+              {currentBook.description}
+            </p>
+          </div>
         </div>
-        <hr className="w-40 text-primary" />
-        <p className="whitespace-pre-line text-sm text-text-secondary">
-          {currentBook.description}
-        </p>
-        <Link href={currentBook.link} target="_blank">
-          <Button>AMAZON LINK</Button>
-        </Link>
       </div>
     </React.Fragment>
   );
