@@ -11,10 +11,9 @@ export const NavigationContext = createContext({
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
   const [direction, setDirection] = useState<NavigationDirection>("splash");
-  const routerArray = ["/about", "/blog", "/books", "/contact"];
+  const routerArray = ["/", "/blog", "/books", "/contact"];
 
   function setAnimationDirection(current: string, next: string) {
-    if (current === "/") setDirection("splash");
     const nextPathIndex = routerArray.findIndex((path) => path === next);
     const currentPathIndex = routerArray.findIndex((path) => path === current);
 

@@ -12,7 +12,7 @@ export default function NavigationArrow(props: { direction: "up" | "down" }) {
   const { direction } = props;
   const { setAnimationDirection } = useContext(NavigationContext);
 
-  const routerArray = ["/about", "/blog", "/books", "/contact"];
+  const routerArray = ["/", "/blog", "/books", "/contact"];
 
   const navigate = () => {
     const navigationDirection = direction === "down" ? 1 : -1;

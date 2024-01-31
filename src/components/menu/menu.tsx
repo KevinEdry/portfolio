@@ -2,9 +2,7 @@
 
 import MenuItem from "./menu-item";
 import { usePathname } from "next/navigation";
-import { LayoutGroup, motion } from "framer-motion";
-
-const MotionMenuItem = motion(MenuItem);
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 
 export default function Menu() {
   const route = usePathname();
@@ -25,34 +23,76 @@ export default function Menu() {
         className="flex h-fit flex-col items-center gap-14 align-baseline"
       >
         <LayoutGroup id="underline">
-          <MotionMenuItem
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            active={route === "/about"}
-            name="about"
-            route="/about"
-          />
-          <MotionMenuItem
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            active={route === "/blog"}
-            name="blog"
-            route="/blog"
-          />
-          <MotionMenuItem
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            active={route === "/books"}
-            name="books"
-            route="/books"
-          />
-          <MotionMenuItem
-            initial={{ x: -200, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            active={route === "/contact"}
-            name="contact"
-            route="/contact"
-          />
+          <AnimatePresence mode="popLayout">
+            <MenuItem
+              initial={{ x: -200, opacity: 0 }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  duration: 0.5,
+                  delay: 0,
+                },
+              }}
+              active={route === "/"}
+              name="about"
+              route="/"
+            />
+            <MenuItem
+              initial={{ x: -200, opacity: 0 }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  duration: 0.5,
+                  delay: 0.1,
+                },
+              }}
+              active={route === "/blog"}
+              name="blog"
+              route="/blog"
+            />
+            <MenuItem
+              initial={{ x: -200, opacity: 0 }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  duration: 0.5,
+                  delay: 0.2,
+                },
+              }}
+              active={route === "/books"}
+              name="books"
+              route="/books"
+            />
+            <MenuItem
+              initial={{ x: -200, opacity: 0 }}
+              animate={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 20,
+                  duration: 0.5,
+                  delay: 0.3,
+                },
+              }}
+              active={route === "/contact"}
+              name="contact"
+              route="/contact"
+            />
+          </AnimatePresence>
         </LayoutGroup>
       </motion.ul>
     </nav>
