@@ -8,7 +8,7 @@ import NavigationArrow from "~/components/navigation-arrow/navigation-arrow";
 import React, { useContext } from "react";
 import PageAnimatePresence from "~/ui/page-animation-presence/page-animation-presence";
 import { NavigationContext } from "~/providers/NavigationProvider";
-import Social from "../social/social";
+import MotionSocial from "../social/motion-social";
 
 export default function PageTransitionLayout({
   children,
@@ -39,7 +39,7 @@ export default function PageTransitionLayout({
               </motion.div>
               <ul className="flex gap-8">
                 <AnimatePresence>
-                  <Social
+                  <MotionSocial
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -51,7 +51,7 @@ export default function PageTransitionLayout({
                     platform="linkedin"
                     link="https://www.linkedin.com/in/kevinedry/"
                   />
-                  <Social
+                  <MotionSocial
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -63,7 +63,7 @@ export default function PageTransitionLayout({
                     platform="github"
                     link="https://github.com/KevinEdry"
                   />
-                  <Social
+                  <MotionSocial
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -75,7 +75,7 @@ export default function PageTransitionLayout({
                     platform="medium"
                     link="https://medium.com/@techg9"
                   />
-                  <Social
+                  <MotionSocial
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,

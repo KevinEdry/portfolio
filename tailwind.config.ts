@@ -8,6 +8,7 @@ export default {
       text: "#FAFAFA",
       "text-secondary": "#7E8599",
       image: "#181933",
+      background: "#1D1C25",
     },
     text: {
       vrl: "writing-mode-vrl",

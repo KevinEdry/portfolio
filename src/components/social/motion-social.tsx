@@ -2,14 +2,24 @@ import TwitterIcon from "~/public/icons/social/twitter.svg";
 import GithubIcon from "~/public/icons/social/github.svg";
 import MediumIcon from "~/public/icons/social/medium.svg";
 import LinkedinIcon from "~/public/icons/social/linkedin.svg";
+import React, { forwardRef } from "react";
+import { motion } from "framer-motion";
 
-export default function Social(props: {
-  platform: "twitter" | "github" | "medium" | "linkedin";
-  link: string;
-}) {
+const MotionSocial = forwardRef<
+  HTMLLIElement,
+  {
+    platform: "twitter" | "github" | "medium" | "linkedin";
+    link: string;
+  }
+>((props, ref) => {
   const { platform, link } = props;
   return (
-    <li>
+    <motion.li
+      initial={{ scale: 1 }}
+      whileHover={{ scale: 1.2 }}
+      ref={ref}
+      className="opacity-0"
+    >
       <a href={link} target="_blank" rel="noopener noreferrer">
         {platform === "github" ? (
           <GithubIcon />
@@ -21,6 +31,10 @@ export default function Social(props: {
           <TwitterIcon />
         )}
       </a>
-    </li>
+    </motion.li>
   );
-}
+});
+
+MotionSocial.displayName = "Social";
+
+export default motion(MotionSocial);
