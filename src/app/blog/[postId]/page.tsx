@@ -11,7 +11,7 @@ import {
   documentToReactComponents,
   type Options,
 } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, MARKS } from "@contentful/rich-text-types";
+import { BLOCKS, MARKS, INLINES } from "@contentful/rich-text-types";
 import type { ReactNode } from "react";
 import { contentfulNodeSchema } from "~/schemas/contentful.schema";
 
@@ -109,6 +109,18 @@ export default async function Post({ params }: { params: { postId: string } }) {
           <div className="mx-2 h-1 w-1 rounded-full bg-text-secondary"></div>
         </div>
       ),
+      [INLINES.HYPERLINK]: (node, _children: ReactNode) => {
+        const { uri } = node.data;
+        return (
+          <a
+            href={uri as never}
+            target="_blank"
+            className="font-medium underline"
+          >
+            {uri}
+          </a>
+        );
+      },
       [BLOCKS.EMBEDDED_ASSET]: (_node, _children: ReactNode) => {
         const node = contentfulNodeSchema.parse(_node);
         const { id } = node.data.target.sys;
