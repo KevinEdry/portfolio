@@ -6,8 +6,9 @@ import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
-import PageTransitionLayout from "~/components/page-transition-layout/page-transition-layout";
 import { AppProviders } from "~/providers/AppProviders";
+import MobileLayout from "~/components/layouts/mobile-layout";
+import DesktopLayout from "~/components/layouts/desktop-layout";
 
 export const metadata = {
   title: "Kevin Edry's Portfolio",
@@ -32,7 +33,8 @@ export default function RootLayout({
             className="-z-10"
           />
           <div className="absolute -z-10 h-full w-full bg-image/20"></div>
-          <PageTransitionLayout>{children}</PageTransitionLayout>
+          <DesktopLayout>{children}</DesktopLayout>
+          <MobileLayout />
         </AppProviders>
         <Analytics />
         <SpeedInsights />
