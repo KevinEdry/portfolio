@@ -24,6 +24,10 @@ export default function PageTransitionLayout({
       y: -300,
       opacity: 0,
     },
+    fade: {
+      opacity: 0,
+      zIndex: 300,
+    },
   };
 
   const { direction } = useContext(NavigationContext);
@@ -40,6 +44,7 @@ export default function PageTransitionLayout({
               <ul className="flex gap-8">
                 <AnimatePresence>
                   <MotionSocial
+                    key={`social_0`}
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -52,6 +57,7 @@ export default function PageTransitionLayout({
                     link="https://www.linkedin.com/in/kevinedry/"
                   />
                   <MotionSocial
+                    key={`social_1`}
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -64,6 +70,7 @@ export default function PageTransitionLayout({
                     link="https://github.com/KevinEdry"
                   />
                   <MotionSocial
+                    key={`social_2`}
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -76,6 +83,7 @@ export default function PageTransitionLayout({
                     link="https://medium.com/@techg9"
                   />
                   <MotionSocial
+                    key={`social_3`}
                     initial={{ opacity: 0, x: 200 }}
                     animate={{
                       opacity: 1,
@@ -95,15 +103,21 @@ export default function PageTransitionLayout({
               <main className="flex h-full w-full flex-col">
                 <PageAnimatePresence>
                   <motion.section
+                    layout="size"
                     variants={variants}
                     initial={
                       direction === "up"
                         ? "down"
                         : direction === "down"
                           ? "up"
-                          : "splash"
+                          : "fade"
                     }
-                    animate={{ y: 0, opacity: 1 }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      width: "100%",
+                      height: "100%",
+                    }}
                     exit={direction}
                     transition={{
                       type: "spring",

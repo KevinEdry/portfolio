@@ -1,23 +1,32 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import TintedImage from "~/ui/tinted-image/tinted-image";
 import { format } from "date-fns";
 import Link from "next/link";
+import { NavigationContext } from "~/providers/NavigationProvider";
 
 export default function Article({
+  id,
   title,
   publishedAt,
-  link,
   image,
   summary,
 }: {
+  id: string;
   title: string;
   publishedAt: Date;
-  link: string;
   image: string;
   summary: string;
 }) {
+  const { setAnimationDirection } = useContext(NavigationContext);
   return (
-    <Link href={link} target="_blank">
+    <Link
+      href={`/blog/${id}`}
+      onClick={() => {
+        setAnimationDirection("/blog", `/blog/${id}`);
+      }}
+    >
       <div className="flex">
         <div className="h-full">
           <TintedImage
@@ -33,7 +42,7 @@ export default function Article({
           </h5>
           <h2 className="text-xl font-bold">{title}</h2>
           <hr className="w-28 text-primary" />
-          <p className="text-md text-text-secondary font-light">{summary}</p>
+          <p className="text-md font-light text-text-secondary">{summary}</p>
         </div>
       </div>
     </Link>

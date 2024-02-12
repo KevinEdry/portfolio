@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@contentful/rich-text-react-renderer':
+    specifier: ^15.19.4
+    version: 15.19.4(react-dom@18.2.0)(react@18.2.0)
   '@t3-oss/env-nextjs':
     specifier: ^0.7.1
     version: 0.7.3(typescript@5.3.3)(zod@3.22.4)
@@ -70,6 +73,9 @@ dependencies:
     version: 3.22.4
 
 devDependencies:
+  '@contentful/rich-text-types':
+    specifier: ^16.3.4
+    version: 16.3.4
   '@svgr/webpack':
     specifier: ^8.1.0
     version: 8.1.0(typescript@5.3.3)
@@ -1410,10 +1416,21 @@ packages:
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
 
-  /@contentful/rich-text-types@16.3.3:
-    resolution: {integrity: sha512-AoC/fbzRiBPodnUfOXGf5v0hjnqGMcaABT6+HdP7Kn/3n6m12y6Uhhcbj1J8H1rIMxTkTmc5LQhroHJNRNyidg==}
+  /@contentful/rich-text-react-renderer@15.19.4(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-pXBX0utaXLdkloQautphPi6cMWSDU99NwM8oLWwExyNhOzKB2DN0resnp/ZmXj728He7aYXX48VA1nVTRqS77g==}
     engines: {node: '>=6.0.0'}
+    peerDependencies:
+      react: ^16.8.6 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.6 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@contentful/rich-text-types': 16.3.4
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
+
+  /@contentful/rich-text-types@16.3.4:
+    resolution: {integrity: sha512-PyVSrQa5j1hO4grgA0Ivo/taiOvW0uFN79JB5JkTG8U7DnWGI7Ap2As6zN6/E6YvDqb7w2cYRMSGSQ3qfxu8HQ==}
+    engines: {node: '>=6.0.0'}
 
   /@emotion/is-prop-valid@0.8.8:
     resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==}
@@ -2563,7 +2580,7 @@ packages:
     resolution: {integrity: sha512-sERvQXozTbvECK3uEJk1lH+GuoJ6h7WFENEo/2v2mNulxX3R9yyiiXR2LjNoaqulc2217XfKxN29u3/NWdQIJw==}
     engines: {node: '>=12'}
     dependencies:
-      '@contentful/rich-text-types': 16.3.3
+      '@contentful/rich-text-types': 16.3.4
       axios: 1.6.7
       contentful-resolve-response: 1.8.1
       contentful-sdk-core: 8.1.2

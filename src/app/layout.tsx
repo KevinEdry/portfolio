@@ -27,9 +27,8 @@ export default function RootLayout({
           <Image
             src="/images/background.png"
             alt="Seattle Skyline"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
+            fill
+            style={{ objectFit: "cover", objectPosition: "center" }}
             className="-z-10"
           />
           <div className="absolute -z-10 h-full w-full bg-image/20"></div>

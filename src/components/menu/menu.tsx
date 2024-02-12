@@ -25,6 +25,7 @@ export default function Menu() {
         <LayoutGroup id="underline">
           <AnimatePresence mode="popLayout">
             <MenuItem
+              key={`menu_0`}
               initial={{ x: -200, opacity: 0 }}
               animate={{
                 x: 0,
@@ -42,6 +43,7 @@ export default function Menu() {
               route="/"
             />
             <MenuItem
+              key={`menu_1`}
               initial={{ x: -200, opacity: 0 }}
               animate={{
                 x: 0,
@@ -59,6 +61,7 @@ export default function Menu() {
               route="/blog"
             />
             <MenuItem
+              key={`menu_2`}
               initial={{ x: -200, opacity: 0 }}
               animate={{
                 x: 0,
@@ -76,6 +79,7 @@ export default function Menu() {
               route="/books"
             />
             <MenuItem
+              key={`menu_3`}
               initial={{ x: -200, opacity: 0 }}
               animate={{
                 x: 0,

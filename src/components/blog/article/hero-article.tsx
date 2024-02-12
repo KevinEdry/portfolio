@@ -1,25 +1,34 @@
-import React from "react";
+"use client";
+
+import React, { useContext } from "react";
 import TintedImage from "~/ui/tinted-image/tinted-image";
 import { format } from "date-fns";
 import Link from "next/link";
+import { NavigationContext } from "~/providers/NavigationProvider";
 
 export default function HeroArticle({
+  id,
   title,
   publishedAt,
   image,
-  link,
   readTime,
   summary,
 }: {
+  id: string;
   title: string;
   publishedAt: Date;
   image: string;
-  link: string;
   readTime: number;
   summary: string;
 }) {
+  const { setAnimationDirection } = useContext(NavigationContext);
   return (
-    <Link href={link} target="_blank">
+    <Link
+      href={`/blog/${id}`}
+      onClick={() => {
+        setAnimationDirection("/blog", `/blog/${id}`);
+      }}
+    >
       <div className="flex w-[560px] flex-col  gap-3">
         <div className="h-full">
           <TintedImage
@@ -36,9 +45,9 @@ export default function HeroArticle({
           </h5>
         </div>
         <hr className="w-28 text-primary" />
-        <p className="text-text-secondary text-lg font-light">{summary}</p>
-        <h6 className="text-md text-text-secondary pt-5 font-bold">
-          {`${Math.round(readTime / 60)} Minutes Read`}
+        <p className="text-lg font-light text-text-secondary">{summary}</p>
+        <h6 className="text-md pt-5 font-bold text-text-secondary">
+          {`${readTime} Minutes Read`}
         </h6>
       </div>
     </Link>
