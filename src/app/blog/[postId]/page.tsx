@@ -137,7 +137,7 @@ export default async function Post({ params }: { params: { postId: string } }) {
   };
 
   return (
-    <div className="bg-background absolute left-0 top-0 z-10 h-full w-full overflow-auto">
+    <div className="absolute left-0 top-0 z-10 h-full w-full overflow-auto bg-background">
       <Link href={"/blog"}>
         <ExitIcon className="fixed right-14 top-10 h-fit w-fit cursor-pointer" />
       </Link>
@@ -145,7 +145,7 @@ export default async function Post({ params }: { params: { postId: string } }) {
         <div className="flex items-center justify-between">
           <h1 className="text-5xl font-bold">{title}</h1>
         </div>
-        <div className="sticky flex items-center gap-3">
+        <div className="flex items-center gap-3">
           <Image
             src="/images/profile.jpeg"
             width={50}
@@ -173,7 +173,7 @@ export default async function Post({ params }: { params: { postId: string } }) {
         </div>
         <hr className="w-full text-primary" />
         <div className="text-lg leading-6 text-text-secondary">
-          {documentToReactComponents(content.json, options)}
+          {documentToReactComponents(content.json as never, options)}
         </div>
       </div>
     </div>
