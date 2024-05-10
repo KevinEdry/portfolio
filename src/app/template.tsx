@@ -1,10 +1,16 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+
 import { NavigationContext } from "~/providers/NavigationProvider";
 
+// This is a workaround for the routes transition issue: https://stackoverflow.com/questions/77691781/exit-animation-on-nextjs-14-framer-motion/77715364#77715364
+
 export default function Template({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
   const variants = {
     up: {
       y: 300,
@@ -26,6 +32,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     <main className="flex h-full w-full flex-col">
       <AnimatePresence mode="popLayout">
         <motion.div
+          key={pathname}
           layout="size"
           variants={variants}
           initial={
