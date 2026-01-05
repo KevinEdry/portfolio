@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useMeasure } from "react-use";
 
 export default function Ticker({
@@ -15,42 +14,33 @@ export default function Ticker({
   pause: boolean;
   children?: React.ReactNode;
 }) {
-  const controls = useAnimation();
   const [ref, { height }] = useMeasure<HTMLUListElement>();
+  const [measuredHeight, setMeasuredHeight] = useState(0);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const startAnimation = () => {
-    void controls.start({
-      y: direction === "down" ? 0 : (height / 2) * -1,
-      transition: {
-        duration: duration,
-        ease: "linear",
-        repeat: Infinity,
-      },
-    });
-  };
   useEffect(() => {
     if (height !== 0) {
-      startAnimation();
-      if (pause) {
-        void controls.stop();
-      }
+      setMeasuredHeight(height);
     }
-  }, [pause, height, startAnimation, controls]);
+  }, [height]);
+
+  const animationName = direction === "up" ? "ticker-up" : "ticker-down";
 
   return (
     <React.Fragment>
-      {height !== 0 ? (
-        <motion.div
-          animate={controls}
+      {measuredHeight !== 0 ? (
+        <div
           className="w-fit"
-          initial={{ y: direction === "down" ? (height / 2) * -1 : 0 }}
+          style={{
+            ["--ticker-height" as string]: `${measuredHeight / 2}px`,
+            animation: `${animationName} ${duration}s linear infinite`,
+            animationPlayState: pause ? "paused" : "running",
+          }}
         >
           <ul className="flex flex-col gap-10">
             {children}
             {children}
           </ul>
-        </motion.div>
+        </div>
       ) : (
         <div>
           <ul ref={ref} className="flex flex-col gap-10">

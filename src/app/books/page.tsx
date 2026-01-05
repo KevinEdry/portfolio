@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Ticker from "~/components/books/ticker";
 import { z } from "zod";
 import booksArrayJson from "~/content/books.json";
@@ -29,13 +29,27 @@ export default function Books() {
     throw new Error("Could not find the first book");
   }
   const [currentBook, changeCurrentBook] = useState(firstBook);
+  const [columns, setColumns] = useState(3);
+
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth < 1280) {
+        setColumns(2);
+      } else {
+        setColumns(3);
+      }
+    };
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
 
   const element = (hovered: boolean) => (
     <div className="gradient-mask-t-80-d absolute flex h-full w-fit gap-5 overflow-hidden">
-      {chunkify(books, 3).map((booksArray, index) => (
+      {chunkify(books, columns).map((booksArray, index) => (
         <Ticker
           direction={index === 1 ? "down" : "up"}
-          key={index}
+          key={`${columns}-${index}`}
           pause={hovered}
           duration={15}
         >
@@ -57,25 +71,26 @@ export default function Books() {
   const [tickers] = useHover(element);
 
   return (
-    <React.Fragment>
-      <div className="relative h-full max-h-full min-h-full w-5/12">
+    <div className="flex h-full flex-col gap-4 overflow-hidden lg:flex-row lg:gap-0">
+      <div className="relative hidden h-full max-h-full min-h-full lg:block lg:w-4/12 xl:w-5/12">
         {tickers}
       </div>
-      <div className="items-left flex w-7/12 flex-col justify-center gap-4 pb-5">
-        <div className="flex w-full gap-5">
-          <div className="flex w-fit flex-col gap-5">
+      <div className="scrollbar-hidden items-left flex flex-1 flex-col justify-start gap-4 overflow-y-auto px-4 py-4 lg:w-8/12 lg:justify-center lg:px-0 lg:py-0 lg:pb-5 xl:w-7/12">
+        <div className="flex w-full flex-col gap-5 lg:flex-row">
+          <div className="flex w-fit shrink-0 flex-col gap-5">
             <Image
               src={currentBook.cover}
               alt={currentBook.title}
               width={200}
               height={336}
+              className="w-32 lg:w-[200px]"
             />
             <Link href={currentBook.link} target="_blank">
               <Button type="outline">Amazon</Button>
             </Link>
           </div>
           <div className="flex flex-1 flex-col gap-3">
-            <h1 className="text-2xl font-bold">{currentBook.title}</h1>
+            <h1 className="text-xl font-bold lg:text-2xl">{currentBook.title}</h1>
             <h4 className="font-light">{currentBook.author}</h4>
             <hr className="w-40 text-primary" />
             <p className="text-md whitespace-pre-line leading-6 text-text-secondary">
@@ -84,6 +99,6 @@ export default function Books() {
           </div>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

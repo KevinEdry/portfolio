@@ -1,0 +1,107 @@
+/* View Transition API - Page transitions */
+.page-content {
+  view-transition-name: page-content;
+}
+
+@keyframes slide-out-up {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+@keyframes slide-in-from-bottom {
+  0% { transform: translateY(100%); opacity: 0; }
+  60% { transform: translateY(-3%); opacity: 1; }
+  80% { transform: translateY(1%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slide-out-down {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes slide-in-from-top {
+  0% { transform: translateY(-100%); opacity: 0; }
+  60% { transform: translateY(3%); opacity: 1; }
+  80% { transform: translateY(-1%); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slide-out-left {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes slide-in-from-right {
+  0% { transform: translateX(100%); opacity: 0; }
+  60% { transform: translateX(-3%); opacity: 1; }
+  80% { transform: translateX(1%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes slide-out-right {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
+
+@keyframes slide-in-from-left {
+  0% { transform: translateX(-100%); opacity: 0; }
+  60% { transform: translateX(3%); opacity: 1; }
+  80% { transform: translateX(-1%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Default: fade transition */
+::view-transition-old(page-content) {
+  animation: fade-out 0.3s ease-out forwards;
+}
+
+::view-transition-new(page-content) {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Direction: down - navigating to next page (e.g., home -> blog) */
+html[data-transition-direction="down"]::view-transition-old(page-content) {
+  animation: slide-out-up 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+html[data-transition-direction="down"]::view-transition-new(page-content) {
+  animation: slide-in-from-bottom 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+/* Direction: up - navigating to previous page (e.g., blog -> home) */
+html[data-transition-direction="up"]::view-transition-old(page-content) {
+  animation: slide-out-down 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+html[data-transition-direction="up"]::view-transition-new(page-content) {
+  animation: slide-in-from-top 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+/* Direction: left - navigating to next page on mobile (swipe left) */
+html[data-transition-direction="left"]::view-transition-old(page-content) {
+  animation: slide-out-left 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+html[data-transition-direction="left"]::view-transition-new(page-content) {
+  animation: slide-in-from-right 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+/* Direction: right - navigating to previous page on mobile (swipe right) */
+html[data-transition-direction="right"]::view-transition-old(page-content) {
+  animation: slide-out-right 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}
+
+html[data-transition-direction="right"]::view-transition-new(page-content) {
+  animation: slide-in-from-left 0.6s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+}

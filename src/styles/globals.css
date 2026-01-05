@@ -1,6 +1,19 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "./animations/page-transitions.css";
+@import "./animations/article-transitions.css";
+@import "./animations/menu-transitions.css";
+@import "./animations/entrance.css";
+@import "./animations/ticker.css";
+
+@theme {
+  --color-primary: #FFB053;
+  --color-text: #FAFAFA;
+  --color-text-secondary: #7E8599;
+  --color-image: #181933;
+  --color-background: #1D1C25;
+
+  --font-sans: Roboto, ui-sans-serif, system-ui, sans-serif;
+}
 
 @layer base {
   @font-face {
@@ -36,5 +49,22 @@
 
   .writing-mode-vrl {
     writing-mode: vertical-rl;
+  }
+
+  .gradient-mask-t-80-d {
+    mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-fade-bottom {
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   }
 }

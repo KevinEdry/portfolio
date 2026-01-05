@@ -29,7 +29,7 @@ export default function TintedImage({
       {hoverable}
       <Image
         className={clsx(
-          "rounded-md transition-all",
+          "rounded-md object-cover transition-all",
           hovered
             ? "filter-none"
             : "contrast-125 grayscale saturate-200 filter",

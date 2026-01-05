@@ -4,29 +4,30 @@ import React from "react";
 
 export default function About() {
   return (
-    <React.Fragment>
-      <div className="h-[80%] w-1/2">
-        <Image
-          width={552}
-          height={630}
-          src="/images/avatar.png"
-          alt="avatar"
-          className="rounded-lg"
-        />
-      </div>
-      <div className="flex h-[80%] w-1/2 flex-col gap-4">
+    <div className="scrollbar-hidden flex h-full items-center justify-center overflow-y-auto px-4 py-4 lg:overflow-visible lg:px-0 lg:py-0">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
+        <div className="flex shrink-0 justify-center lg:w-2/5 lg:justify-start xl:w-1/2">
+          <Image
+            width={552}
+            height={630}
+            src="/images/avatar.png"
+            alt="avatar"
+            className="h-auto w-48 rounded-lg object-contain lg:max-h-full lg:w-auto"
+          />
+        </div>
+        <div className="flex flex-col gap-4 lg:w-1/2">
         <div className="flex flex-col gap-3">
-          <h1 className="text-4xl font-black">Kevin Edry</h1>
+          <h1 className="text-2xl font-black lg:text-4xl">Kevin Edry</h1>
           <hr className="w-40 text-primary" />
           <p className="text-text/40">Senior Software Development Engineer</p>
         </div>
 
         <div className="flex w-full flex-col gap-6 text-sm">
           <p>
-            Hello! I’m Kevin, an experienced Senior Software Development
+            Hello! I'm Kevin, an experienced Senior Software Development
             Engineer based in Seattle, WA. I have a proven track record in
             architecting and implementing innovative solutions across the full
-            stack. I’m proficient in TypeScript, Python, and various frameworks,
+            stack. I'm proficient in TypeScript, Python, and various frameworks,
             leading projects from conception to execution while ensuring robust
             system architecture and high performance.
           </p>
@@ -46,8 +47,9 @@ export default function About() {
             of enterprise SaaS models.
           </p>
         </div>
-        <Signature className="h-72 pt-10" />
+        <Signature className="hidden h-72 pt-10 lg:block" />
+        </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 }

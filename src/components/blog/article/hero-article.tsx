@@ -21,12 +21,13 @@ export default function HeroArticle({
   readTime: number;
   summary: string;
 }) {
-  const { setAnimationDirection } = useContext(NavigationContext);
+  const { navigateTo } = useContext(NavigationContext);
   return (
     <Link
       href={`/blog/${id}`}
-      onClick={() => {
-        setAnimationDirection("/blog", `/blog/${id}`);
+      onClick={(e) => {
+        e.preventDefault();
+        navigateTo(`/blog/${id}`, "/blog");
       }}
     >
       <div className="flex w-[560px] flex-col  gap-3">

@@ -1,18 +1,17 @@
 "use client";
 
 import clsx from "clsx";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useContext } from "react";
 import { NavigationContext } from "~/providers/NavigationProvider";
 import ArrowIcon from "~/public/icons/arrow.svg";
 
 export default function NavigationArrow(props: { direction: "up" | "down" }) {
-  const router = useRouter();
   const pathname = usePathname();
   const { direction } = props;
-  const { setAnimationDirection } = useContext(NavigationContext);
+  const { navigateTo } = useContext(NavigationContext);
 
-  const routerArray = ["/", "/blog", "/books", "/contact"];
+  const routerArray = ["/", "/blog", "/books", "/oss", "/contact"];
 
   const navigate = () => {
     const navigationDirection = direction === "down" ? 1 : -1;
@@ -35,8 +34,7 @@ export default function NavigationArrow(props: { direction: "up" | "down" }) {
     if (nextPathname == null) {
       throw new Error("could not find next route");
     }
-    setAnimationDirection(pathname, nextPathname);
-    router.push(nextPathname);
+    navigateTo(nextPathname, pathname);
   };
 
   return (

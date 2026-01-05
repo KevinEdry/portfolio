@@ -1,0 +1,18 @@
+/* Ticker animations */
+@keyframes ticker-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(calc(var(--ticker-height) * -1));
+  }
+}
+
+@keyframes ticker-down {
+  0% {
+    transform: translateY(calc(var(--ticker-height) * -1));
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

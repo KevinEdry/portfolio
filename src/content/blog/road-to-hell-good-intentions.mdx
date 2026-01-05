@@ -1,0 +1,179 @@
+export const meta = {
+  title: "The Road to Hell is Paved with Good Intentions",
+  publishedAt: "2025-12-22",
+  readTime: 6,
+  thumbnail: "/images/blog/good-place.gif",
+  summary: "A story about bad decision-making. About designing a system without understanding the fundamentals. About not knowing what good or bad even looks like."
+};
+
+This is a story about bad decision-making. About designing a system without understanding the fundamentals. About not knowing what "good" or "bad" even looks like.
+
+I want to talk about how we built our core web application without realizing what was fundamentally wrong with it. Despite everybody's best intentions, we arrived at absolute hell — a place where no matter how much you hate it, you cannot escape. Why it happened. Why it will keep happening. And what, if anything, we can do about it.
+
+# **Act I: The Reasonable Beginning**
+
+The story begins in an unassuming place, with regular stakeholders like Marketing and Product doing regular stakeholder things.
+
+In your run-of-the-mill SaaS organization, the engineering team was tasked with building a web product. After some deliberation and a bunch of EDDs, they landed on adopting Angular as their flagship framework. Nothing out of the ordinary. Nothing special. Angular 2 had just come out and looked promising. Companies were adopting it. It was a wise, battle-tested choice.
+
+*This is the part of the movie where everything seems fine and you know something terrible is coming.*
+
+Over the years, stakeholder requests came in — some that made sense, some that didn't. Commits were made. PRs were approved. "LGTM 👍" engineers wrote, right-clicking on the big shiny green button with the confidence of someone who definitely read all 47 changed files.
+
+Code was deployed.
+
+And slowly, people started noticing the cracks.
+
+---
+
+# **Act II: The Testing Salvation**
+
+Bugs started appearing in production. Not all at once — one by one, dotted here and there like a game of whack-a-mole designed by someone who hates you.
+
+"WE ARE MERGING BAD CODE," one engineer proclaimed.
+
+"We're not confident in our code — WE NEED MORE TESTS!" another declared at the retrospective, speaking in the cadence of someone who just discovered religion.
+
+And so, we started writing integration tests. The easy kind. About 250 of them over the span of a year.
+
+And it worked! Bugs appeared less and less until they nearly subsided.
+
+But at what cost?
+
+---
+
+# **Act III: The Slow Descent**
+
+Twenty-five minutes for CI to build isn't *that* bad, right?
+
+…RIGHT?!
+
+With limited knowledge in caching, Docker optimization, and parallelization — and Cypress requiring you to sell a kidney just to orchestrate tests — we got there pretty fast.
+
+Using basic `npm install` worked for a while. But the service grew. Engineers started adding dependencies like they were collecting Pokémon. About 350 unique ones ended up in the service. And with that, install times in CI began to balloon.
+
+25 minutes became 35. 35 became 45. Sometimes more.
+
+> *Time is a flat circle, and that circle is a loading spinner.*
+
+---
+
+# **Act IV: The Performance Reckoning**
+
+With so many dependencies, our Core Web Vitals started to suffer. Page loads were slow. Weekly skirmishes with CLS and LCP became the norm — a war of attrition against metrics that Google invented specifically to ruin your week.
+
+"We cannot keep this up!" the on-call engineer shrieked.
+
+"Angular is the problem!" someone diagnosed.
+
+"Hydration is taking too long!" the senior mandated.
+
+"We need a solution, and fast!"
+
+So we found one.
+
+*EJS.*
+
+---
+
+# **Act V: The "Solution"**
+
+The idea was novel: a simple template merge to achieve that sweet, sweet sub-3-second page load time. EDDs were written and discussed. Tickets were created and estimated in Jira. Story points were assigned with the precision of someone throwing darts blindfolded.
+
+And then the work began.
+
+It was difficult. It was long. But we did it! The most performant page! A simple template merge! We did everything in our power to avoid hydration and state!
+
+But again… at what cost?
+
+No state. No components. No design system. No type safety. No IntelliSense.
+
+Just vibes and string concatenation.
+
+---
+
+# **Act VI: The Return of the Repressed**
+
+When requests came from stakeholders to maintain this EJS monster, engineers stared at the codebase the way you stare at IKEA furniture you assembled wrong three steps ago.
+
+"We cannot write code for this!"
+
+"We need a way to handle frontend events…"
+
+*And at this point, you and I both know that another bad decision is barreling toward us like a freight train made of technical debt.*
+
+"Let's use Preact for components," someone suggested, "and then convert those components in the hot path to a string with Preact's render function, and load that string into EJS!"
+
+"Brilliant!" others approved.
+
+*Not realizing they had just reinvented hydration.*
+
+So with a smile and a newfound idea in their heads, they implemented hydration with EJS. Building Preact components for EJS. Angular components for Angular. Two parallel universes of UI code, maintained by people who increasingly wished they had chosen a different career.
+
+And they did not manage to maintain the codebase.
+
+**THE END**
+
+---
+
+# **Why bad things happen to good people?**
+
+When you look at this (hopefully) fictional story, three main issues come to mind.
+
+**First: We didn't know what good looks like.** The team lacked deep expertise in frontend applications and the optimizations that come with that knowledge. This isn't a moral failing — it's just where they were.
+
+**Second: We treated symptoms, not causes.** When bugs occurred, instead of recognizing them as a direct result of a lean code review process, lax code standards, and generally brittle code, they slapped a band-aid on the problem instead of fixing it. When the frontend bloated with dependencies and Core Web Vitals tanked, they blamed the framework for being "too magical" and "bloated" instead of looking in the mirror.
+
+**Third: We tried to fix a people problem with technical solutions.** Over and over again. Each "fix" backfired, compounding the complexity, until we arrived at an unmaintainable codebase held together by duct tape and prayers.
+
+---
+
+# **Were these solutions actually bad?**
+
+This is a tougher question than it sounds.
+
+**From a technical perspective:** Yes. Absolutely. This is a horrible implementation of what should have been a somewhat simple frontend application. Each step of the way just descended us deeper into hell with no apparent solution in sight.
+
+**From a managerial perspective:** Not really. These engineers were highly motivated. They used every tool in their toolbelt to the best of their ability. They shipped. They solved problems. They kept the lights on.
+
+**From a business perspective:** This system — while convoluted, brittle, and broken — enabled the company to soar past its revenue goals and make millions each year.
+
+How do you define success if not by achieving and surpassing your goals?
+
+Our engineering brains get annoyed by this because, on paper, it's a mess of a system. But the proof is in the pudding, folks. The pudding is making money.
+
+---
+
+# **So whats our escape plan?**
+
+In order to escape this hell we created, the first step is to understand that it is a hell of our own making.
+
+We did this to ourselves.
+
+Not Angular. Not hydration. Not any magical framework with too many opinions.
+
+*We* allowed this to happen.
+
+And while getting out will absolutely require technical solutions — better architecture, cleaner abstractions, maybe even god forbid a rewrite — it's a human problem first. It always was.
+
+---
+
+# **The good place**
+
+![from: The Good Place.](/images/blog/good-place.gif)
+
+Here's the thing, though.
+
+The people who built this system? They weren't bad engineers. They weren't lazy or careless. They were doing their best with what they knew, under pressure, with deadlines, with stakeholders breathing down their necks, with the tools and knowledge they had at the time.
+
+That's not a tragedy. That's just… building software.
+
+The real lesson isn't "don't be like them." It's "recognize when you *are* them." Because at some point, we all are. We all inherit codebases we don't fully understand. We all make decisions that seem reasonable in the moment and horrifying in hindsight. We all add that one dependency at 4pm on a Friday because it solves the problem *right now*.
+
+The road to hell is paved with good intentions — but it's also walked by good people.
+
+The way out isn't blame. It's awareness. It's humility. It's the willingness to say, "We built this, and we can build something better."
+
+And maybe, just maybe, the next system we build will be the one we're proud of.
+
+Or at least the one we can maintain.

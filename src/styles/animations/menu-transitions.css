@@ -1,0 +1,18 @@
+/* Menu underline view transition */
+.menu-underline {
+  view-transition-name: menu-underline;
+}
+
+::view-transition-old(menu-underline),
+::view-transition-new(menu-underline) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(menu-underline) {
+  opacity: 0;
+}
+
+::view-transition-new(menu-underline) {
+  opacity: 1;
+}

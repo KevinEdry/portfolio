@@ -1,13 +1,13 @@
-import "~/styles/globals.css";
 import "~/styles/reset.css";
+import "~/styles/globals.css";
 
 import Image from "next/image";
 import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ViewTransitions } from "next-view-transitions";
 
 import { AppProviders } from "~/providers/AppProviders";
-import MobileLayout from "~/components/layouts/mobile-layout";
 import DesktopLayout from "~/components/layouts/desktop-layout";
 
 export const metadata = {
@@ -22,23 +22,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="overflow-hidden">
-        <AppProviders>
-          <Image
-            src="/images/background.png"
-            alt="Seattle Skyline"
-            fill
-            style={{ objectFit: "cover", objectPosition: "center" }}
-            className="-z-10"
-          />
-          <div className="absolute -z-10 h-full w-full bg-image/20"></div>
-          <DesktopLayout>{children}</DesktopLayout>
-          <MobileLayout />
-        </AppProviders>
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className="font-sans overflow-auto lg:overflow-hidden">
+          <AppProviders>
+            <div className="fixed inset-0 -z-10">
+              <Image
+                src="/images/background.png"
+                alt="Seattle Skyline"
+                fill
+                style={{ objectFit: "cover", objectPosition: "center" }}
+              />
+              <div className="absolute inset-0 bg-image/20"></div>
+            </div>
+            <DesktopLayout>{children}</DesktopLayout>
+          </AppProviders>
+          <Analytics />
+          <SpeedInsights />
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

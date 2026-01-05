@@ -1,0 +1,59 @@
+{
+  "author": [
+    {
+      "name": "nestjs-trpc",
+      "description": "NestJS module for building end-to-end typesafe APIs with tRPC. Enables seamless integration between NestJS and tRPC for type-safe client-server communication.",
+      "language": "TypeScript",
+      "url": "https://github.com/KevinEdry/nestjs-trpc",
+      "stars": 293,
+      "thumbnail": "https://opengraph.githubassets.com/1/KevinEdry/nestjs-trpc"
+    },
+    {
+      "name": "runelite-quest-voiceover",
+      "description": "A RuneLite plugin that adds AI-generated voice acting to Old School RuneScape quests, enhancing the gameplay experience with immersive audio narration.",
+      "language": "Java",
+      "url": "https://github.com/KevinEdry/runelite-quest-voiceover",
+      "stars": 6,
+      "thumbnail": "https://opengraph.githubassets.com/1/KevinEdry/runelite-quest-voiceover"
+    }
+  ],
+  "maintainer": [
+    {
+      "name": "nixpkgs",
+      "description": "Nix Packages collection - the largest repository of Nix packages and NixOS modules.",
+      "language": "Nix",
+      "url": "https://github.com/NixOS/nixpkgs",
+      "thumbnail": "https://opengraph.githubassets.com/1/NixOS/nixpkgs"
+    }
+  ],
+  "contributor": [
+    {
+      "name": "tRPC",
+      "description": "End-to-end typesafe APIs made easy. Move fast and break nothing with tRPC.",
+      "language": "TypeScript",
+      "url": "https://github.com/trpc/trpc",
+      "thumbnail": "https://opengraph.githubassets.com/1/trpc/trpc"
+    },
+    {
+      "name": "devenv",
+      "description": "Fast, declarative, reproducible, and composable developer environments using Nix.",
+      "language": "Nix",
+      "url": "https://github.com/cachix/devenv",
+      "thumbnail": "https://opengraph.githubassets.com/1/cachix/devenv"
+    },
+    {
+      "name": "quirrel",
+      "description": "The Task Queueing Solution for Serverless. Job scheduling and background tasks for Next.js, Blitz.js, and more.",
+      "language": "TypeScript",
+      "url": "https://github.com/quirrel-dev/quirrel",
+      "thumbnail": "https://opengraph.githubassets.com/1/quirrel-dev/quirrel"
+    },
+    {
+      "name": "nextjs-auth0",
+      "description": "Auth0 SDK for signing in and authenticating users in Next.js applications.",
+      "language": "TypeScript",
+      "url": "https://github.com/auth0/nextjs-auth0",
+      "thumbnail": "https://opengraph.githubassets.com/1/auth0/nextjs-auth0"
+    }
+  ]
+}

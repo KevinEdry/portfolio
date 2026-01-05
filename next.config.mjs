@@ -1,3 +1,5 @@
+import createMDX from "@next/mdx";
+
 /**
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially useful
  * for Docker builds.
@@ -6,15 +8,25 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  experimental: {
+    viewTransition: true,
+  },
   images: {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "images.ctfassets.net",
-        port: "",
-        pathname: "/z9j3unugwq2q/**",
+        hostname: "opengraph.githubassets.com",
       },
     ],
+  },
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
+      },
+    },
   },
   webpack(config) {
     // Grab the existing rule that handles SVG imports
@@ -45,4 +57,6 @@ const config = {
   },
 };
 
-export default config;
+const withMDX = createMDX();
+
+export default withMDX(config);

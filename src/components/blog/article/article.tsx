@@ -19,12 +19,13 @@ export default function Article({
   image: string;
   summary: string;
 }) {
-  const { setAnimationDirection } = useContext(NavigationContext);
+  const { navigateTo } = useContext(NavigationContext);
   return (
     <Link
       href={`/blog/${id}`}
-      onClick={() => {
-        setAnimationDirection("/blog", `/blog/${id}`);
+      onClick={(e) => {
+        e.preventDefault();
+        navigateTo(`/blog/${id}`, "/blog");
       }}
     >
       <div className="flex">

@@ -1,55 +1,46 @@
 "use client";
 import clsx from "clsx";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import React, { useContext, forwardRef } from "react";
+import { useContext } from "react";
 import { NavigationContext } from "~/providers/NavigationProvider";
 import { usePathname } from "next/navigation";
 
-const MenuItem = forwardRef<
-  HTMLLIElement,
-  {
-    name: string;
-    route: string;
-    active: boolean;
-  }
->((props, ref) => {
-  const { setAnimationDirection } = useContext(NavigationContext);
-  const { name, route, active } = props;
+interface MenuItemProps {
+  name: string;
+  route: string;
+  active: boolean;
+  animationIndex: number;
+}
+
+export default function MenuItem({ name, route, active, animationIndex }: MenuItemProps) {
+  const { navigateTo } = useContext(NavigationContext);
   const pathname = usePathname();
 
   return (
     <li
-      key={`MenuItem_${name}`}
-      ref={ref}
-      className="flex h-full flex-1 cursor-pointer gap-1 opacity-0"
+      className="animate-slide-in-from-left flex h-full flex-1 cursor-pointer flex-col gap-1 opacity-0 lg:flex-row"
+      style={{ animationDelay: `${animationIndex * 0.1}s` }}
     >
-      <Link
+      <a
         href={route}
-        onClick={() => {
-          setAnimationDirection(pathname, route);
+        onClick={(e) => {
+          e.preventDefault();
+          navigateTo(route, pathname);
         }}
         className={clsx(
-          "rotate-180 transition-all [writing-mode:vertical-rl] hover:font-bold",
+          "transition-all hover:font-bold lg:rotate-180 lg:[writing-mode:vertical-rl]",
           active ? "font-bold" : "",
         )}
       >
         {name}
-      </Link>
+      </a>
 
       {active ? (
-        <motion.div
-          animate
-          layoutId="underline"
-          className="h-auto w-[2px] bg-primary"
-        ></motion.div>
+        <div
+          className="menu-underline h-[2px] w-auto bg-primary lg:h-auto lg:w-[2px]"
+        />
       ) : (
-        <div className="mr-0.5"></div>
+        <div className="mb-0.5 lg:mb-0 lg:mr-0.5" />
       )}
     </li>
   );
-});
-
-MenuItem.displayName = "MenuItem";
-
-export default motion(MenuItem);
+}
