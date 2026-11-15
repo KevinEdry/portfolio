@@ -16,7 +16,7 @@ const SOCIALS = [
 
 export default function Contact() {
   return (
-    <div className="flex h-full w-full items-center justify-center px-4 lg:px-0">
+    <div className="flex h-full w-full items-center px-4 lg:px-0">
       <div className="flex w-full max-w-3xl flex-col gap-8">
         <div className="flex flex-col gap-2">
           <h1 className="text-6xl font-black leading-none text-primary lg:text-8xl">

@@ -19,7 +19,7 @@ export default function About() {
 
   return (
     <div className="scrollbar-hidden flex h-full w-full overflow-y-auto px-4 py-4 lg:px-0 lg:py-0">
-      <div className="m-auto flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-14">
+      <div className="my-auto flex w-full flex-col gap-6 lg:flex-row lg:items-center lg:gap-14">
         <div className="flex shrink-0 justify-center">
           <div className="group relative aspect-[3/4] w-44 overflow-hidden rounded-lg shadow-xl shadow-black/50 lg:w-[320px]">
             <Image
