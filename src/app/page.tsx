@@ -1,53 +1,83 @@
+"use client";
+
 import Signature from "~/public/icons/signature.svg";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
+import { usePathname } from "next/navigation";
+import { NavigationContext } from "~/providers/NavigationProvider";
+import Button from "~/ui/button/button";
+
+const PROOF_POINTS = [
+  "Co-founded Shapeshift Gaming and Divart — through AWS Floor 28, Fusion LA, and Facebook for Startups.",
+  "Led engineering as VP of R&D at Youleap.",
+  "Polyglot by habit — TypeScript, Python, Java, Nix, whatever the problem calls for — and an open-source author, maintainer, and contributor.",
+];
 
 export default function About() {
-  return (
-    <div className="scrollbar-hidden flex h-full items-center justify-center overflow-y-auto px-4 py-4 lg:overflow-visible lg:px-0 lg:py-0">
-      <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:gap-8">
-        <div className="flex shrink-0 justify-center lg:w-2/5 lg:justify-start xl:w-1/2">
-          <Image
-            width={552}
-            height={630}
-            src="/images/avatar.png"
-            alt="avatar"
-            className="h-auto w-48 rounded-lg object-contain lg:max-h-full lg:w-auto"
-          />
-        </div>
-        <div className="flex flex-col gap-4 lg:w-1/2">
-        <div className="flex flex-col gap-3">
-          <h1 className="text-2xl font-black lg:text-4xl">Kevin Edry</h1>
-          <hr className="w-40 text-primary" />
-          <p className="text-text/40">Senior Software Development Engineer</p>
-        </div>
+  const { navigateTo } = useContext(NavigationContext);
+  const pathname = usePathname();
 
-        <div className="flex w-full flex-col gap-6 text-sm">
-          <p>
-            Hello! I'm Kevin, an experienced Senior Software Development
-            Engineer based in Seattle, WA. I have a proven track record in
-            architecting and implementing innovative solutions across the full
-            stack. I'm proficient in TypeScript, Python, and various frameworks,
-            leading projects from conception to execution while ensuring robust
-            system architecture and high performance.
-          </p>
-          <p>
-            I have been privileged to participate in several accelerator
-            programs like AWS Floor 28 Builder Space, Fusion LA, and Facebook
-            for Startups. These experiences have expanded my network, sharpened
-            my technical skills, and empowered me to contribute to a leading
-            tech company with a strong understanding of business leadership.
-          </p>
-          <p>
-            Driven by a commitment to innovation and leveraging the latest in
-            technology to create efficient, automated systems, I am dedicated to
-            contributing to a leading tech company. With my extensive technical
-            experience and a proven track record in the tech industry, I am
-            poised to enhance any suite of platforms, particularly in the realm
-            of enterprise SaaS models.
-          </p>
+  return (
+    <div className="scrollbar-hidden flex h-full w-full overflow-y-auto px-4 py-4 lg:px-0 lg:py-0">
+      <div className="m-auto flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-14">
+        <div className="flex shrink-0 justify-center">
+          <div className="group relative aspect-[3/4] w-44 overflow-hidden rounded-lg shadow-xl shadow-black/50 lg:w-[320px]">
+            <Image
+              src="/images/avatar-lake.jpg"
+              alt="Kevin Edry at Lake Louise, mountains behind him"
+              priority
+              fill
+              sizes="(min-width: 1024px) 320px, 176px"
+              className="object-cover object-[50%_30%] brightness-[0.85] contrast-105 saturate-[0.3] transition-all duration-300 group-hover:brightness-100 group-hover:saturate-100"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-image/40 transition-opacity duration-300 group-hover:opacity-0"></div>
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-background/80 to-transparent transition-opacity duration-300 group-hover:opacity-0"></div>
+          </div>
         </div>
-        <Signature className="hidden h-72 pt-10 lg:block" />
+        <div className="flex max-w-xl flex-col gap-6">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm uppercase tracking-[0.2em] text-text-secondary">
+              Entrepreneur · Manager · Engineer
+            </p>
+            <h1 className="text-4xl font-black leading-none lg:text-6xl">
+              Kevin Edry
+            </h1>
+            <hr className="w-40 text-primary" />
+          </div>
+
+          <p className="max-w-xl text-lg leading-7">
+            I build products and the teams that ship them — from the first
+            line of code to the company around it.
+          </p>
+
+          <ul className="flex max-w-xl flex-col gap-3">
+            {PROOF_POINTS.map((point) => (
+              <li key={point} className="flex items-start gap-3 leading-6">
+                <span
+                  aria-hidden
+                  className="mt-2.5 h-px w-5 shrink-0 bg-primary"
+                />
+                {point}
+              </li>
+            ))}
+          </ul>
+
+          <p className="max-w-xl leading-6 text-text-secondary">
+            These days I&apos;m a senior engineer in Seattle, shipping
+            production systems and writing about how engineering teams
+            actually work — the blog and the bookshelf are where that lives.
+          </p>
+
+          <div className="flex items-center gap-4 pt-2">
+            <Button type="solid" onClick={() => navigateTo("/contact", pathname)}>
+              Get in touch
+            </Button>
+            <Button type="outline" onClick={() => navigateTo("/blog", pathname)}>
+              Read the blog
+            </Button>
+          </div>
+
+          <Signature className="hidden h-28 self-start pt-2 lg:block" />
         </div>
       </div>
     </div>

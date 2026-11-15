@@ -41,14 +41,14 @@ export default function HeroArticle({
         </div>
         <div className="flex justify-between">
           <h2 className="text-xl font-bold">{title}</h2>
-          <h5 className="text-sm font-thin">
+          <h5 className="text-sm text-text-muted">
             {format(publishedAt, "MMM dd, yyyy")}
           </h5>
         </div>
         <hr className="w-28 text-primary" />
-        <p className="text-lg font-light text-text-secondary">{summary}</p>
-        <h6 className="text-md pt-5 font-bold text-text-secondary">
-          {`${readTime} Minutes Read`}
+        <p className="text-lg text-text-secondary">{summary}</p>
+        <h6 className="text-md pt-5 font-bold text-text-muted">
+          {`${readTime} min read`}
         </h6>
       </div>
     </Link>

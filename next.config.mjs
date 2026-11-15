@@ -8,9 +8,6 @@ await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
 const config = {
-  experimental: {
-    viewTransition: true,
-  },
   images: {
     remotePatterns: [
       {
@@ -23,7 +20,7 @@ const config = {
   turbopack: {
     rules: {
       "*.svg": {
-        loaders: ["@svgr/webpack"],
+        loaders: [{ loader: "@svgr/webpack", options: { svgo: false } }],
         as: "*.js",
       },
     },
@@ -46,7 +43,7 @@ const config = {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] }, // exclude if *.svg?url
-        use: ["@svgr/webpack"],
+        use: [{ loader: "@svgr/webpack", options: { svgo: false } }],
       },
     );
 

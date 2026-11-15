@@ -17,7 +17,7 @@ export default function TintedImage({
   link?: string;
 }) {
   const wrapper = () => (
-    <div className="bg-image/40 hover:bg-image/0 absolute z-10 h-full w-full cursor-pointer rounded-md transition-all"></div>
+    <div className="bg-image/40 hover:bg-image/0 absolute z-10 h-full w-full cursor-pointer rounded-md transition-all duration-200"></div>
   );
   const [hoverable, hovered] = useHover(wrapper);
 
@@ -29,14 +29,13 @@ export default function TintedImage({
       {hoverable}
       <Image
         className={clsx(
-          "rounded-md object-cover transition-all",
-          hovered
-            ? "filter-none"
-            : "contrast-125 grayscale saturate-200 filter",
+          "rounded-md object-cover transition-all duration-200",
+          hovered ? "filter-none" : "brightness-90 saturate-50 filter",
         )}
         alt={alt}
         src={src}
         fill
+        sizes={`${width}px`}
       />
     </div>
   );

@@ -3,35 +3,39 @@ import Image from "next/image";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    h1: ({ children }) => <h1 className="pt-5 text-3xl">{children}</h1>,
+    h1: ({ children }) => (
+      <h1 className="pt-5 text-3xl font-bold">{children}</h1>
+    ),
     p: ({ children }) => (
-      <p className="py-5 text-lg font-light leading-6 text-text-secondary">
-        {children}
-      </p>
+      <p className="py-5 text-lg leading-8 text-text/85">{children}</p>
     ),
     strong: ({ children }) => <span className="font-bold">{children}</span>,
     ol: ({ children }) => (
-      <ol className="list-decimal pl-8 text-lg font-light leading-6 marker:text-text-secondary">
+      <ol className="list-decimal pl-8 text-lg leading-8 marker:text-text-muted">
         {children}
       </ol>
     ),
     ul: ({ children }) => (
-      <ul className="list-disc pl-8 text-lg font-light leading-6 marker:text-text-secondary">
+      <ul className="list-disc pl-8 text-lg leading-8 marker:text-text-muted">
         {children}
       </ul>
     ),
     li: ({ children }) => (
-      <li className="text-lg font-light leading-6 text-text-secondary">{children}</li>
+      <li className="text-lg leading-8 text-text/85">{children}</li>
     ),
     hr: () => (
       <div className="flex h-10 w-full items-center justify-center">
-        <div className="mx-2 h-1 w-1 rounded-full bg-text-secondary"></div>
-        <div className="mx-2 h-1 w-1 rounded-full bg-text-secondary"></div>
-        <div className="mx-2 h-1 w-1 rounded-full bg-text-secondary"></div>
+        <div className="mx-2 h-1 w-1 rounded-full bg-text-muted"></div>
+        <div className="mx-2 h-1 w-1 rounded-full bg-text-muted"></div>
+        <div className="mx-2 h-1 w-1 rounded-full bg-text-muted"></div>
       </div>
     ),
     a: ({ href, children }) => (
-      <a href={href} target="_blank" className="font-medium underline text-text-secondary">
+      <a
+        href={href}
+        target="_blank"
+        className="font-medium text-text underline decoration-primary underline-offset-4 hover:text-primary"
+      >
         {children}
       </a>
     ),
@@ -45,9 +49,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           className="rounded-sm"
         />
         {alt && (
-          <span className="text-sm font-light text-text-secondary/50">
-            {alt}
-          </span>
+          <span className="text-sm font-light text-text-muted">{alt}</span>
         )}
       </span>
     ),

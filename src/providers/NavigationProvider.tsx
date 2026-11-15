@@ -1,11 +1,19 @@
 "use client";
 
-import { type ReactNode, createContext, useState, useEffect, useRef, useCallback } from "react";
-import { useDebounce, useMouseWheel } from "react-use";
+import {
+  type ReactNode,
+  createContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from "react";
 import { usePathname } from "next/navigation";
 import { useTransitionRouter } from "next-view-transitions";
 
 type NavigationDirection = "fade" | "up" | "down" | "left" | "right";
+
+export const ROUTES = ["/", "/blog", "/books", "/oss", "/contact"] as const;
 
 interface NavigationContextType {
   direction: NavigationDirection;
@@ -17,7 +25,8 @@ const defaultContext: NavigationContextType = {
   navigateTo: () => {},
 };
 
-export const NavigationContext = createContext<NavigationContextType>(defaultContext);
+export const NavigationContext =
+  createContext<NavigationContextType>(defaultContext);
 
 function setDocumentDirection(dir: NavigationDirection) {
   if (typeof document !== "undefined") {
@@ -25,6 +34,38 @@ function setDocumentDirection(dir: NavigationDirection) {
   }
 }
 
+// Returns the neighboring main route, or null at either end — the sequence
+// deliberately does not wrap so a full scroll-through ends on /contact.
+export function getAdjacentRoute(current: string, step: 1 | -1): string | null {
+  const index = ROUTES.findIndex((route) => route === current);
+  if (index === -1) {
+    return null;
+  }
+  return ROUTES[index + step] ?? null;
+}
+
+// Wheel events inside a container that can scroll belong to that container,
+// even at its edges — reading must never trigger a route change.
+function isInsideScrollable(target: EventTarget | null): boolean {
+  let element = target instanceof Element ? target : null;
+  while (element != null && element !== document.documentElement) {
+    if (element instanceof HTMLElement) {
+      const { overflowY } = window.getComputedStyle(element);
+      if (
+        (overflowY === "auto" || overflowY === "scroll") &&
+        element.scrollHeight > element.clientHeight
+      ) {
+        return true;
+      }
+    }
+    element = element.parentElement;
+  }
+  return false;
+}
+
+const WHEEL_THRESHOLD = 100;
+const WHEEL_IDLE_RESET_MS = 300;
+const NAVIGATION_COOLDOWN_MS = 700;
 const SWIPE_THRESHOLD = 50;
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
@@ -33,14 +74,14 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
 
   const [direction, setDirection] = useState<NavigationDirection>("fade");
   const [isMobile, setIsMobile] = useState(false);
-  const routerArray = ["/", "/blog", "/books", "/oss", "/contact"];
 
-  const mouseWheel = useMouseWheel();
-  const [mouseWheelYDelta, updateMouseWheelYDelta] = useState<number>(mouseWheel);
+  const wheelDelta = useRef(0);
+  const lastWheelAt = useRef(0);
+  const lockedUntil = useRef(0);
 
-  const touchStartX = useRef<number>(0);
-  const touchEndX = useRef<number>(0);
-  const hasMoved = useRef<boolean>(false);
+  const touchStart = useRef({ x: 0, y: 0 });
+  const touchEnd = useRef({ x: 0, y: 0 });
+  const hasMoved = useRef(false);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 1024);
@@ -53,78 +94,145 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     setDocumentDirection(direction);
   }, [direction]);
 
-  function navigateWithTransition(path: string, dir: NavigationDirection) {
-    setDocumentDirection(dir);
-    setDirection(dir);
-    window.scrollTo(0, 0);
-    router.push(path);
-  }
+  const navigateWithTransition = useCallback(
+    (path: string, dir: NavigationDirection) => {
+      lockedUntil.current = Date.now() + NAVIGATION_COOLDOWN_MS;
+      wheelDelta.current = 0;
+      setDocumentDirection(dir);
+      setDirection(dir);
+      router.push(path);
+    },
+    [router],
+  );
 
-  function getDirection(current: string, next: string): NavigationDirection {
-    const regex = /\/blog\/./g;
-    if (regex.test(next) || regex.test(current)) {
-      return "fade";
-    }
+  const getDirection = useCallback(
+    (current: string, next: string): NavigationDirection => {
+      const regex = /\/blog\/./;
+      if (regex.test(next) || regex.test(current)) {
+        return "fade";
+      }
 
-    const nextPathIndex = routerArray.findIndex((path) => path === next);
-    const currentPathIndex = routerArray.findIndex((path) => path === current);
+      const nextPathIndex = ROUTES.findIndex((path) => path === next);
+      const currentPathIndex = ROUTES.findIndex((path) => path === current);
 
-    if (nextPathIndex === -1 || currentPathIndex === -1) {
-      return "fade";
-    }
+      if (nextPathIndex === -1 || currentPathIndex === -1) {
+        return "fade";
+      }
 
-    if (isMobile) {
-      return currentPathIndex < nextPathIndex ? "left" : "right";
-    }
-    return currentPathIndex < nextPathIndex ? "down" : "up";
-  }
+      if (isMobile) {
+        return currentPathIndex < nextPathIndex ? "left" : "right";
+      }
+      return currentPathIndex < nextPathIndex ? "down" : "up";
+    },
+    [isMobile],
+  );
 
-  function navigateTo(path: string, current: string) {
-    const dir = getDirection(current, path);
-    navigateWithTransition(path, dir);
-  }
+  const navigateTo = useCallback(
+    (path: string, current: string) => {
+      navigateWithTransition(path, getDirection(current, path));
+    },
+    [navigateWithTransition, getDirection],
+  );
 
-  useDebounce(
-    () => {
-      if (!isMobile && routerArray.includes(pathname)) {
-        if (mouseWheel > mouseWheelYDelta) {
-          navigateWithTransition(getNextPath(pathname), "down");
-        } else if (mouseWheel < mouseWheelYDelta) {
-          navigateWithTransition(getPrevPath(pathname), "up");
-        }
-        updateMouseWheelYDelta(mouseWheel);
+  const stepTo = useCallback(
+    (step: 1 | -1, dir: NavigationDirection) => {
+      const next = getAdjacentRoute(pathname, step);
+      if (next != null) {
+        navigateWithTransition(next, dir);
       }
     },
-    100,
-    [mouseWheel, isMobile],
+    [pathname, navigateWithTransition],
   );
+
+  useEffect(() => {
+    if (isMobile) return;
+
+    const handleWheel = (event: WheelEvent) => {
+      if (!ROUTES.some((route) => route === pathname)) return;
+      if (isInsideScrollable(event.target)) return;
+
+      const now = Date.now();
+      if (now < lockedUntil.current) {
+        wheelDelta.current = 0;
+        return;
+      }
+      if (now - lastWheelAt.current > WHEEL_IDLE_RESET_MS) {
+        wheelDelta.current = 0;
+      }
+      lastWheelAt.current = now;
+      wheelDelta.current += event.deltaY;
+
+      if (Math.abs(wheelDelta.current) < WHEEL_THRESHOLD) return;
+
+      const step = wheelDelta.current > 0 ? 1 : -1;
+      stepTo(step, step === 1 ? "down" : "up");
+    };
+
+    window.addEventListener("wheel", handleWheel, { passive: true });
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [isMobile, pathname, stepTo]);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!ROUTES.some((route) => route === pathname)) return;
+      if (event.metaKey || event.ctrlKey || event.altKey) return;
+
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
+      if (Date.now() < lockedUntil.current) return;
+
+      if (event.key === "ArrowDown" || event.key === "PageDown") {
+        event.preventDefault();
+        stepTo(1, isMobile ? "left" : "down");
+      } else if (event.key === "ArrowUp" || event.key === "PageUp") {
+        event.preventDefault();
+        stepTo(-1, isMobile ? "right" : "up");
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [pathname, isMobile, stepTo]);
 
   const handleSwipe = useCallback(() => {
     if (!hasMoved.current) return;
+    if (!ROUTES.some((route) => route === pathname)) return;
 
-    const swipeDistance = touchStartX.current - touchEndX.current;
+    const deltaX = touchStart.current.x - touchEnd.current.x;
+    const deltaY = touchStart.current.y - touchEnd.current.y;
 
-    if (Math.abs(swipeDistance) < SWIPE_THRESHOLD) return;
-    if (!routerArray.includes(pathname)) return;
+    if (Math.abs(deltaX) < SWIPE_THRESHOLD) return;
+    if (Math.abs(deltaX) < Math.abs(deltaY) * 1.5) return;
+    if (Date.now() < lockedUntil.current) return;
 
-    if (swipeDistance > 0) {
-      navigateWithTransition(getNextPath(pathname), "left");
+    if (deltaX > 0) {
+      stepTo(1, "left");
     } else {
-      navigateWithTransition(getPrevPath(pathname), "right");
+      stepTo(-1, "right");
     }
-  }, [pathname]);
+  }, [pathname, stepTo]);
 
   useEffect(() => {
     if (!isMobile) return;
 
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX.current = e.touches[0]?.clientX ?? 0;
-      touchEndX.current = e.touches[0]?.clientX ?? 0;
+    const handleTouchStart = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      touchStart.current = { x: touch?.clientX ?? 0, y: touch?.clientY ?? 0 };
+      touchEnd.current = touchStart.current;
       hasMoved.current = false;
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      touchEndX.current = e.touches[0]?.clientX ?? 0;
+    const handleTouchMove = (event: TouchEvent) => {
+      const touch = event.touches[0];
+      touchEnd.current = { x: touch?.clientX ?? 0, y: touch?.clientY ?? 0 };
       hasMoved.current = true;
     };
 
@@ -143,44 +251,6 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
       document.removeEventListener("touchend", handleTouchEnd);
     };
   }, [isMobile, handleSwipe]);
-
-  function getNextPath(current: string): string {
-    const currentPathIndex = routerArray.findIndex((path) => path === current);
-
-    if (currentPathIndex === -1) {
-      throw new Error("could not find current pathname index.");
-    }
-
-    const nextPathname =
-      currentPathIndex + 1 >= routerArray.length
-        ? routerArray[0]
-        : routerArray[currentPathIndex + 1];
-
-    if (nextPathname == null) {
-      throw new Error("could not find next pathname");
-    }
-
-    return nextPathname;
-  }
-
-  function getPrevPath(current: string): string {
-    const currentPathIndex = routerArray.findIndex((path) => path === current);
-
-    if (currentPathIndex === -1) {
-      throw new Error("could not find current pathname index.");
-    }
-
-    const nextPathname =
-      currentPathIndex - 1 < 0
-        ? routerArray[routerArray.length - 1]
-        : routerArray[currentPathIndex - 1];
-
-    if (nextPathname == null) {
-      throw new Error("could not find next pathname");
-    }
-
-    return nextPathname;
-  }
 
   return (
     <NavigationContext.Provider value={{ direction, navigateTo }}>

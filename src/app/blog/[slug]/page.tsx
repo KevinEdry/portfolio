@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import Social from "~/components/social/social";
 import ExitLink from "~/components/exit-link/exit-link";
 import { format } from "date-fns";
@@ -17,6 +19,33 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const meta = await getPostMeta(slug);
+
+  if (!meta) {
+    return {};
+  }
+
+  return {
+    title: meta.title,
+    description: meta.summary,
+    openGraph: {
+      type: "article",
+      title: meta.title,
+      description: meta.summary,
+      publishedTime: meta.publishedAt,
+      images: [{ url: meta.thumbnail }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: meta.title,
+      description: meta.summary,
+      images: [meta.thumbnail],
+    },
+  };
+}
+
 export default async function Post({ params }: Props) {
   const { slug } = await params;
   const meta = await getPostMeta(slug);
@@ -28,6 +57,10 @@ export default async function Post({ params }: Props) {
   const { default: Content } = await import(`~/content/blog/${slug}.mdx`);
 
   const { publishedAt, readTime, title } = meta;
+
+  const posts = await getAllPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === slug);
+  const nextPost = posts[currentIndex + 1] ?? posts[0];
 
   return (
     <div className="article-content absolute left-0 top-0 z-50 h-full w-full overflow-auto bg-background">
@@ -47,7 +80,7 @@ export default async function Post({ params }: Props) {
           <div className="flex w-full flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-1">
             <div>
               <h3 className="font-bold">Kevin Edry</h3>
-              <h4 className="text-sm text-text-secondary">
+              <h4 className="text-sm text-text-muted">
                 {readTime} min read · {format(publishedAt, "MMM dd, yyyy")}
               </h4>
             </div>
@@ -63,8 +96,49 @@ export default async function Post({ params }: Props) {
           </div>
         </div>
         <hr className="w-full text-primary" />
-        <div className="text-base leading-6 text-text-secondary lg:text-lg">
+        <div className="text-base leading-7 lg:text-lg">
           <Content />
+        </div>
+        <hr className="w-full text-primary" />
+        <div className="flex flex-col gap-6">
+          <div className="flex items-start gap-4">
+            <Image
+              src="/images/profile.jpeg"
+              width={50}
+              height={50}
+              alt="Kevin's profile picture"
+              className="h-12 w-12 rounded-full"
+            />
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold">Kevin Edry</h3>
+              <p className="text-sm leading-6 text-text-secondary">
+                Entrepreneur, manager, and engineer in Seattle, writing about
+                how engineering teams actually work.{" "}
+                <Link
+                  href="/contact"
+                  className="font-medium text-text underline decoration-primary underline-offset-4 hover:text-primary"
+                >
+                  Get in touch
+                </Link>
+              </p>
+            </div>
+          </div>
+          {nextPost != null && nextPost.slug !== slug && (
+            <Link
+              href={`/blog/${nextPost.slug}`}
+              className="group flex flex-col gap-1 rounded-md border border-border bg-surface/50 px-5 py-4 transition-colors duration-200 hover:border-primary/60"
+            >
+              <span className="text-xs uppercase tracking-[0.18em] text-text-muted">
+                Read next
+              </span>
+              <span className="font-bold group-hover:text-primary">
+                {nextPost.title}
+              </span>
+              <span className="text-sm text-text-secondary">
+                {nextPost.readTime} min read
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </div>

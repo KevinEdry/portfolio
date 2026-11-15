@@ -6,8 +6,8 @@ import { usePathname } from "next/navigation";
 export default function Menu() {
   const route = usePathname();
   return (
-    <nav className="flex w-full shrink-0 items-center justify-center py-2 lg:h-full lg:w-1/12 lg:flex-col lg:items-baseline lg:justify-center lg:py-0 lg:pb-10">
-      <ul className="flex h-fit flex-row items-center gap-6 align-baseline lg:flex-col lg:gap-14">
+    <nav className="flex w-full shrink-0 items-center justify-center py-2 lg:w-auto lg:flex-col lg:items-start lg:py-0">
+      <ul className="flex h-fit flex-row items-center gap-5 align-baseline lg:flex-col lg:gap-14">
         <MenuItem
           animationIndex={0}
           active={route === "/"}

@@ -16,3 +16,10 @@
     transform: translateY(0);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="ticker-up"],
+  [style*="ticker-down"] {
+    animation-play-state: paused !important;
+  }
+}
