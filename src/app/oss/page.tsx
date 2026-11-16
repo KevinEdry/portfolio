@@ -108,9 +108,9 @@ export default function OSS() {
           Open source
         </p>
         <h1 className="text-3xl font-black leading-tight lg:text-5xl">
-          Code I give
+          Code in
           <br />
-          away
+          the wild
         </h1>
         <hr className="w-40 text-primary" />
         <p className="max-w-sm leading-7 text-text-secondary">
