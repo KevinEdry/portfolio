@@ -6,6 +6,7 @@ import React, { useContext } from "react";
 import { usePathname } from "next/navigation";
 import { NavigationContext } from "~/providers/NavigationProvider";
 import Button from "~/ui/button/button";
+import WaveHeading from "~/components/text/wave-heading";
 
 const PROOF_POINTS = [
   "Co-founded Shapeshift Gaming and Divart — through AWS Floor 28, Fusion LA, and Facebook for Startups.",
@@ -39,9 +40,10 @@ export default function About() {
             <p className="text-sm uppercase tracking-[0.2em] text-text-secondary">
               Entrepreneur · Manager · Engineer
             </p>
-            <h1 className="text-4xl font-black leading-none lg:text-6xl">
-              Kevin Edry
-            </h1>
+            <WaveHeading
+              text="Kevin Edry"
+              className="text-4xl font-black leading-none lg:text-6xl"
+            />
             <hr className="w-40 text-primary" />
           </div>
 

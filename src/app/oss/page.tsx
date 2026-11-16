@@ -6,6 +6,7 @@ import AuthorIcon from "~/public/icons/oss/author.svg";
 import MaintainerIcon from "~/public/icons/oss/maintainer.svg";
 import ContributorIcon from "~/public/icons/oss/contributor.svg";
 import GitHubIcon from "~/public/icons/social/github.svg";
+import WaveHeading from "~/components/text/wave-heading";
 
 const projectSchema = z.object({
   name: z.string(),
@@ -55,7 +56,7 @@ function ProjectCard({
       target="_blank"
       rel="noopener noreferrer"
       className={clsx(
-        "group flex flex-col gap-3 rounded-lg border border-border bg-surface/80 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/60",
+        "glass group flex flex-col gap-3 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/10",
         featured && "sm:col-span-2 lg:p-7",
       )}
     >
@@ -107,11 +108,10 @@ export default function OSS() {
         <p className="text-sm uppercase tracking-[0.2em] text-text-secondary">
           Open source
         </p>
-        <h1 className="text-3xl font-black leading-tight lg:text-5xl">
-          Code in
-          <br />
-          the wild
-        </h1>
+        <WaveHeading
+          text="Code in the wild"
+          className="text-3xl font-black leading-tight lg:text-5xl"
+        />
         <hr className="w-40 text-primary" />
         <p className="max-w-sm leading-7 text-text-secondary">
           Projects I author, maintain, or chip away at. Every card goes

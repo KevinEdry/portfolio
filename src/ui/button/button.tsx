@@ -10,10 +10,10 @@ export default function Button(props: {
     <button
       onClick={onClick}
       className={clsx(
-        "h-10 cursor-pointer rounded-md px-8 font-bold transition-colors duration-200",
-        type === "solid" && "bg-primary text-background hover:bg-primary/90",
-        type === "outline" &&
-          "border border-primary text-primary hover:bg-primary/10",
+        "h-11 cursor-pointer rounded-full px-8 font-bold transition-all duration-200",
+        type === "solid" &&
+          "bg-primary text-background shadow-lg shadow-primary/25 hover:bg-primary/90",
+        type === "outline" && "glass text-primary hover:bg-white/10",
       )}
     >
       {children}

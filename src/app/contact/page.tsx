@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CopyEmail from "~/components/contact/copy-email";
 import SeattleClock from "~/components/contact/seattle-clock";
+import WaveHeading from "~/components/text/wave-heading";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -20,9 +21,12 @@ export default function Contact() {
       <div className="my-auto flex w-full items-center lg:gap-14">
         <div className="flex w-full max-w-xl flex-col gap-8">
         <div className="flex flex-col gap-2">
-          <h1 className="text-6xl font-black leading-none text-primary lg:text-8xl">
-            Let&apos;s talk.
-          </h1>
+          <WaveHeading
+            text="Let's talk."
+            fill="#FFB053"
+            accent="#FAFAFA"
+            className="text-6xl font-black leading-none lg:text-8xl"
+          />
           <p className="pt-3 text-2xl font-bold leading-tight lg:text-4xl">
             Tell me what you&apos;re building.
           </p>
@@ -36,7 +40,7 @@ export default function Contact() {
         <div className="flex flex-wrap items-center gap-4">
           <a
             href="mailto:me@kedry.dev"
-            className="flex h-10 items-center rounded-md bg-primary px-8 font-bold text-background transition-colors duration-200 hover:bg-primary/90"
+            className="flex h-11 items-center rounded-full bg-primary px-8 font-bold text-background shadow-lg shadow-primary/25 transition-colors duration-200 hover:bg-primary/90"
           >
             Email me
           </a>

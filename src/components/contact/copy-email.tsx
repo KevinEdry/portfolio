@@ -20,7 +20,7 @@ export default function CopyEmail({ email }: { email: string }) {
       type="button"
       onClick={copy}
       aria-label={`Copy ${email} to clipboard`}
-      className="group flex h-10 cursor-pointer items-center gap-3 rounded-md border border-border bg-surface/50 px-5 transition-colors duration-200 hover:border-primary"
+      className="glass group flex h-11 cursor-pointer items-center gap-3 rounded-full px-6 transition-colors duration-200 hover:bg-white/10"
     >
       <span className="font-medium transition-colors duration-200 group-hover:text-primary">
         {email}

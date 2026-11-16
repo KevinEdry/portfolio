@@ -38,8 +38,8 @@ export default function PanoramicBackground() {
           style={{ objectFit: "cover", objectPosition: "center top" }}
         />
       </div>
-      <div className="absolute inset-0 bg-image/30"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/60"></div>
+      <div className="absolute inset-0 bg-image/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-transparent to-background/45"></div>
     </div>
   );
 }

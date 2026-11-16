@@ -18,8 +18,8 @@ export default function DesktopLayout({
 }) {
   return (
     <div className="relative flex min-h-screen flex-col text-text lg:h-screen">
-      <div className="container mx-auto flex w-full flex-1 flex-col px-4 lg:min-h-0 lg:px-16">
-        <div className="sticky top-0 z-10 flex h-auto w-full shrink-0 flex-col gap-3 bg-background/95 py-4 backdrop-blur-sm lg:static lg:h-1/6 lg:flex-row lg:items-center lg:justify-between lg:gap-0 lg:bg-transparent lg:py-0 lg:backdrop-blur-none">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-4 lg:min-h-0 lg:px-20">
+        <div className="sticky top-0 z-10 flex h-auto w-full shrink-0 flex-col gap-3 border-b border-white/10 bg-background/50 py-4 backdrop-blur-xl lg:static lg:h-1/6 lg:flex-row lg:items-center lg:justify-between lg:gap-0 lg:border-none lg:bg-transparent lg:py-0 lg:backdrop-blur-none">
           <div className="flex items-center justify-between">
             <HeroTitle />
             <ul className="flex shrink-0 gap-3 lg:hidden">
@@ -48,7 +48,7 @@ export default function DesktopLayout({
             ))}
           </ul>
         </div>
-        <main className="relative flex min-h-0 flex-1 overflow-x-clip lg:overflow-hidden">
+        <main className="relative flex min-h-0 flex-1 overflow-x-clip lg:overflow-y-hidden">
           <PageReveal>{children}</PageReveal>
         </main>
       </div>
