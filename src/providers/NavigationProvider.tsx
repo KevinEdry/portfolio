@@ -8,10 +8,9 @@ import {
   useRef,
   useCallback,
 } from "react";
-import { usePathname } from "next/navigation";
-import { useTransitionRouter } from "next-view-transitions";
+import { usePathname, useRouter } from "next/navigation";
 
-type NavigationDirection = "fade" | "up" | "down" | "left" | "right";
+export type NavigationDirection = "fade" | "up" | "down" | "left" | "right";
 
 export const ROUTES = ["/", "/blog", "/books", "/oss", "/contact"] as const;
 
@@ -27,12 +26,6 @@ const defaultContext: NavigationContextType = {
 
 export const NavigationContext =
   createContext<NavigationContextType>(defaultContext);
-
-function setDocumentDirection(dir: NavigationDirection) {
-  if (typeof document !== "undefined") {
-    document.documentElement.dataset.transitionDirection = dir;
-  }
-}
 
 // Returns the neighboring main route, or null at either end — the sequence
 // deliberately does not wrap so a full scroll-through ends on /contact.
@@ -69,7 +62,7 @@ const NAVIGATION_COOLDOWN_MS = 700;
 const SWIPE_THRESHOLD = 50;
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
-  const router = useTransitionRouter();
+  const router = useRouter();
   const pathname = usePathname();
 
   const [direction, setDirection] = useState<NavigationDirection>("fade");
@@ -90,15 +83,10 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
-    setDocumentDirection(direction);
-  }, [direction]);
-
   const navigateWithTransition = useCallback(
     (path: string, dir: NavigationDirection) => {
       lockedUntil.current = Date.now() + NAVIGATION_COOLDOWN_MS;
       wheelDelta.current = 0;
-      setDocumentDirection(dir);
       setDirection(dir);
       router.push(path);
     },

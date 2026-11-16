@@ -1,6 +1,7 @@
 import HeroTitle from "../hero-title/hero-title";
 import Menu from "../menu/menu";
 import NavigationArrow from "../navigation-arrow/navigation-arrow";
+import PageReveal from "./page-reveal";
 import Social from "../social/motion-social";
 
 const SOCIAL_LINKS = [
@@ -47,8 +48,8 @@ export default function DesktopLayout({
             ))}
           </ul>
         </div>
-        <main className="flex min-h-0 flex-1 lg:overflow-hidden">
-          {children}
+        <main className="relative flex min-h-0 flex-1 overflow-x-clip lg:overflow-hidden">
+          <PageReveal>{children}</PageReveal>
         </main>
       </div>
       <div className="fixed left-6 top-1/2 z-20 hidden -translate-y-1/2 lg:block">

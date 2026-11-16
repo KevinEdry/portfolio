@@ -66,6 +66,16 @@ export default function About() {
             These days I&apos;m a senior engineer in Seattle, shipping
             production systems and writing about how engineering teams
             actually work — the blog and the bookshelf are where that lives.
+            After hours I run{" "}
+            <a
+              href="https://seattlerooftops.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-text underline decoration-primary underline-offset-4 hover:text-primary"
+            >
+              seattlerooftops.com
+            </a>
+            , a field guide to the city&apos;s rooftop bars.
           </p>
 
           <div className="flex items-center gap-4 pt-2">
@@ -76,8 +86,12 @@ export default function About() {
               Read the blog
             </Button>
           </div>
-
-          <Signature className="hidden h-28 self-start pt-2 lg:block" />
+        </div>
+        <div className="hidden min-w-0 flex-1 flex-col items-center justify-center gap-6 self-stretch border-l border-border pl-14 lg:flex">
+          <Signature className="h-44 opacity-80" />
+          <p className="text-xs uppercase tracking-[0.2em] text-text-muted">
+            Seattle, WA
+          </p>
         </div>
       </div>
     </div>

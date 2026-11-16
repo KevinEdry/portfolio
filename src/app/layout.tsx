@@ -1,16 +1,15 @@
 import "~/styles/reset.css";
 import "~/styles/globals.css";
 
-import Image from "next/image";
 import React from "react";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { ViewTransitions } from "next-view-transitions";
 
 import { AppProviders } from "~/providers/AppProviders";
 import DesktopLayout from "~/components/layouts/desktop-layout";
+import PanoramicBackground from "~/components/layouts/panoramic-background";
 
 const roboto = localFont({
   src: [
@@ -50,28 +49,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ViewTransitions>
-      <html lang="en" className={roboto.variable}>
-        <body className="font-sans overflow-auto lg:overflow-hidden">
-          <AppProviders>
-            <div className="fixed inset-0 -z-10">
-              <Image
-                src="/images/background.png"
-                alt=""
-                fill
-                priority
-                sizes="100vw"
-                style={{ objectFit: "cover", objectPosition: "center" }}
-              />
-              <div className="absolute inset-0 bg-image/30"></div>
-              <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background/60"></div>
-            </div>
-            <DesktopLayout>{children}</DesktopLayout>
-          </AppProviders>
-          <Analytics />
-          <SpeedInsights />
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="en" className={roboto.variable}>
+      <body className="font-sans overflow-auto bg-background lg:overflow-hidden">
+        <AppProviders>
+          <PanoramicBackground />
+          <DesktopLayout>{children}</DesktopLayout>
+        </AppProviders>
+        <Analytics />
+        <SpeedInsights />
+      </body>
+    </html>
   );
 }

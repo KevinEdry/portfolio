@@ -17,7 +17,8 @@ const SOCIALS = [
 export default function Contact() {
   return (
     <div className="flex h-full w-full items-center px-4 lg:px-0">
-      <div className="flex w-full max-w-3xl flex-col gap-8">
+      <div className="my-auto flex w-full items-center lg:gap-14">
+        <div className="flex w-full max-w-xl flex-col gap-8">
         <div className="flex flex-col gap-2">
           <h1 className="text-6xl font-black leading-none text-primary lg:text-8xl">
             Let&apos;s talk.
@@ -57,9 +58,26 @@ export default function Contact() {
           ))}
         </ul>
 
-        <p className="text-sm text-text-muted">
+        <p className="max-w-lg text-sm leading-6 text-text-secondary">
+          Visiting Seattle? I also run{" "}
+          <a
+            href="https://seattlerooftops.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-text underline decoration-primary underline-offset-4 hover:text-primary"
+          >
+            seattlerooftops.com
+          </a>{" "}
+          — the city&apos;s rooftop bars, reviewed by locals.
+        </p>
+
+        <p className="text-sm text-text-muted lg:hidden">
           <SeattleClock /> I usually reply within a day.
         </p>
+        </div>
+        <div className="hidden min-w-0 flex-1 items-center justify-center self-stretch border-l border-border pl-14 lg:flex">
+          <SeattleClock variant="display" />
+        </div>
       </div>
     </div>
   );
