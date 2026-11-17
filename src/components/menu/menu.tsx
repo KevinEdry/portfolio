@@ -47,9 +47,13 @@ export default function Menu() {
     const place = (animate: boolean) => {
       const active = nav.querySelector<HTMLElement>("[data-active]");
       if (active == null) return;
+      // offsetLeft would measure against the item's own <li>; the pill
+      // positions within the nav, so measure both against the nav box.
+      const navBox = nav.getBoundingClientRect();
+      const activeBox = active.getBoundingClientRect();
       const target = {
-        x: active.offsetLeft,
-        width: active.offsetWidth,
+        x: activeBox.left - navBox.left,
+        width: activeBox.width,
         autoAlpha: 1,
       };
       if (

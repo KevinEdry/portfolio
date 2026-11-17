@@ -56,7 +56,9 @@ export default function RepoGrid({ repos }: RepoGridProps) {
 
   useGSAP(
     () => {
-      const tiles = gsap.utils.toArray<HTMLElement>("[data-tile]");
+      const tiles = gsap.utils.toArray<HTMLElement>(
+        "[data-tile], [data-mcard]",
+      );
       gsap.from(tiles, {
         autoAlpha: 0,
         y: 28,
@@ -146,7 +148,51 @@ export default function RepoGrid({ repos }: RepoGridProps) {
       ref={containerRef}
       className="flex min-h-0 w-full flex-1 items-center justify-center"
     >
-      <div className="grid w-full grid-cols-2 gap-3 [grid-template-areas:'hero_hero'_'hero_hero'_'a_a'_'b_c'_'d_e'_'f_f'] lg:aspect-[2.8/1] lg:max-h-full lg:grid-cols-7 lg:grid-rows-2 lg:[grid-template-areas:'hero_hero_a_a_b_c_c'_'hero_hero_d_e_e_f_f']">
+      <ul className="flex w-full flex-col gap-3 lg:hidden">
+        {repos.map((repo, repoIndex) => (
+          <li key={repo.name}>
+            <a
+              href={repo.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-mcard
+              className="glass relative block overflow-hidden rounded-2xl p-5 text-text"
+            >
+              <span
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background: `radial-gradient(120% 120% at 82% -8%, ${glowFor(repo.name)} 0%, rgba(255, 255, 255, 0) 58%)`,
+                }}
+              />
+              <span className="relative flex flex-col gap-2">
+                <span className="flex items-baseline justify-between gap-3">
+                  <span className="text-lg font-bold tracking-tight">
+                    {repo.name}
+                  </span>
+                  <span className="font-mono text-[11px] text-text-muted/70">
+                    {String(repoIndex + 1).padStart(2, "0")}
+                  </span>
+                </span>
+                <span className="text-sm leading-6 text-text-secondary">
+                  {repo.description}
+                </span>
+                <span className="flex flex-wrap items-center gap-4 pt-1 text-[11px] uppercase tracking-[0.14em] text-text-muted">
+                  <span>{repo.category}</span>
+                  <span>{repo.language}</span>
+                  {repo.stars !== undefined && (
+                    <span className="tabular-nums">★ {repo.stars}</span>
+                  )}
+                  <span className="font-medium normal-case tracking-normal text-primary">
+                    View repo →
+                  </span>
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div className="hidden w-full gap-3 lg:grid lg:aspect-[2.8/1] lg:max-h-full lg:grid-cols-7 lg:grid-rows-2 lg:[grid-template-areas:'hero_hero_a_a_b_c_c'_'hero_hero_d_e_e_f_f']">
         {repos.slice(0, SLOT_COUNT).map((repo, repoIndex) => {
           const slot = slotOf(repoIndex);
           const isHero = slot === 0;

@@ -25,7 +25,7 @@ export default function MenuItem({ name, route, active }: MenuItemProps) {
           navigateTo(route, pathname);
         }}
         className={clsx(
-          "relative z-10 block rounded-full px-3 py-1.5 text-[12px] uppercase tracking-[0.16em] transition-colors duration-200 lg:px-4",
+          "relative z-10 block rounded-full px-2 py-1.5 text-[11px] uppercase tracking-[0.1em] transition-colors duration-200 lg:px-4 lg:text-[12px] lg:tracking-[0.16em]",
           active
             ? "font-bold text-primary"
             : "text-text/60 hover:text-text",
