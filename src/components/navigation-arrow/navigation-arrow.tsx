@@ -49,7 +49,7 @@ export default function NavigationArrow(props: { direction: "up" | "down" }) {
       )}
       <span
         className={clsx(
-          "glass flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors duration-200 group-hover:bg-white/10",
+          "glass flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors duration-200 group-hover:bg-white/75",
           direction === "down" && "rotate-180",
         )}
       >

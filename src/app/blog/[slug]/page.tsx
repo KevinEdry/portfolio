@@ -63,7 +63,7 @@ export default async function Post({ params }: Props) {
   const nextPost = posts[currentIndex + 1] ?? posts[0];
 
   return (
-    <div className="article-content absolute left-0 top-0 z-50 h-full w-full overflow-auto bg-background/85 backdrop-blur-2xl">
+    <div className="article-content fixed inset-0 z-[60] overflow-auto bg-background/85 backdrop-blur-2xl">
       <ExitLink href="/blog" />
       <div className="container mx-auto flex w-full flex-col gap-6 px-4 py-16 lg:w-[680px] lg:gap-8 lg:px-0 lg:py-32">
         <div className="flex items-center justify-between">
@@ -126,7 +126,7 @@ export default async function Post({ params }: Props) {
           {nextPost != null && nextPost.slug !== slug && (
             <Link
               href={`/blog/${nextPost.slug}`}
-              className="glass group flex flex-col gap-1 rounded-2xl px-5 py-4 transition-colors duration-200 hover:bg-white/10"
+              className="glass group flex flex-col gap-1 rounded-2xl px-5 py-4 transition-colors duration-200 hover:bg-white/75"
             >
               <span className="text-xs uppercase tracking-[0.18em] text-text-muted">
                 Read next

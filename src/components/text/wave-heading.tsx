@@ -11,9 +11,9 @@ import React, { useLayoutEffect, useRef } from "react";
 export default function WaveHeading({
   text,
   className,
-  fill = "#FAFAFA",
-  accent = "#FFB053",
-  base = "rgba(250, 250, 250, 0.14)",
+  fill = "#1A1D29",
+  accent = "#E8820C",
+  base = "rgba(26, 29, 41, 0.15)",
 }: {
   text: string;
   className?: string;

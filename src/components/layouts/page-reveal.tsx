@@ -4,9 +4,9 @@ import gsap from "gsap";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect, useRef } from "react";
 
-// Annnimate-style staggered entrance on every route change: the incoming
-// page's top-level content blocks rise in sequence. One tuned timeline,
-// GSAP-driven, SSR-safe, honors prefers-reduced-motion.
+// Cinematic page entrance: the incoming page's content blocks rise out of a
+// soft blur in sequence while accent rules draw themselves in. One tuned
+// GSAP timeline, SSR-safe, honors prefers-reduced-motion.
 export default function PageReveal({
   children,
 }: {
@@ -23,20 +23,38 @@ export default function PageReveal({
     const root = stage.firstElementChild;
     if (root == null) return;
     const blocks = root.children.length > 1 ? [...root.children] : [root];
+    const rules = root.querySelectorAll("hr");
 
     const context = gsap.context(() => {
-      gsap.fromTo(
+      const timeline = gsap.timeline();
+      timeline.fromTo(
         blocks,
-        { y: 32, autoAlpha: 0 },
+        { y: 28, autoAlpha: 0, filter: "blur(10px)" },
         {
           y: 0,
           autoAlpha: 1,
-          duration: 0.8,
+          filter: "blur(0px)",
+          duration: 0.9,
           ease: "power3.out",
-          stagger: 0.09,
-          clearProps: "transform,opacity,visibility",
+          stagger: 0.12,
+          clearProps: "transform,opacity,visibility,filter",
         },
+        0,
       );
+      if (rules.length > 0) {
+        timeline.fromTo(
+          rules,
+          { scaleX: 0, transformOrigin: "left center" },
+          {
+            scaleX: 1,
+            duration: 0.9,
+            ease: "power3.inOut",
+            stagger: 0.1,
+            clearProps: "transform",
+          },
+          0.25,
+        );
+      }
     }, stage);
 
     return () => context.revert();

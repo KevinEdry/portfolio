@@ -1,0 +1,200 @@
+/* Vendored from the annnimate starter pack; retokened for the Apple-light
+   site. The wrapper is an inline board (the demo's full-screen stage and
+   font-face are dropped), tiles stay ink so the board reads mechanical
+   against the light page, and the seam shows the page through. */
+
+.sfb_wrap {
+  --sfb-bg: transparent;
+  --sfb-tile: #1a1d29;
+  --sfb-tile-edge: rgba(255, 255, 255, 0.08);
+  --sfb-seam: transparent;
+  --sfb-fg: #f6f4f0;
+  --sfb-grey: #8a90a3;
+  --sfb-line: rgba(26, 29, 41, 0.14);
+  --sfb-focus: rgba(26, 29, 41, 0.3);
+  --sfb-tile-w: clamp(30px, 3vw, 52px);
+  --sfb-tile-h: clamp(44px, 4.4vw, 76px);
+  --sfb-tile-gap: clamp(3px, 0.35vw, 6px);
+  --sfb-row-gap: 14px;
+  --sfb-font: clamp(26px, 2.7vw, 46px);
+  --sfb-radius: 5px;
+}
+
+.sfb_wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  font-family: inherit;
+  letter-spacing: -0.02em;
+  color: var(--sfb-fg);
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.sfb_stage {
+  display: contents;
+}
+
+.sfb_board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sfb-row-gap, 14px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sfb_board:focus-visible {
+  outline: 1px solid var(--sfb-focus, rgba(26, 29, 41, 0.3));
+  outline-offset: 12px;
+  border-radius: var(--sfb-radius, 5px);
+}
+
+.sfb_row {
+  display: flex;
+  gap: var(--sfb-tile-gap, 6px);
+}
+
+.sfb_tile {
+  position: relative;
+  flex: none;
+  width: var(--sfb-tile-w, 52px);
+  height: var(--sfb-tile-h, 76px);
+}
+
+/* Two static halves show the resting character. Two flaps sit over them:
+   the top flap falls forward (origin at the seam) showing the outgoing
+   character, the bottom flap lands from edge-on showing the incoming one.
+   The seam between the halves is the page colour showing through. */
+.sfb_half,
+.sfb_flap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: calc(50% - 1px);
+  overflow: hidden;
+  background: var(--sfb-tile, #1a1d29);
+  box-shadow: inset 0 0 0 1px var(--sfb-tile-edge, rgba(255, 255, 255, 0.08));
+}
+
+.sfb_half_top,
+.sfb_flap_top {
+  top: 0;
+  border-radius: var(--sfb-radius, 5px) var(--sfb-radius, 5px) 0 0;
+}
+
+.sfb_half_bottom,
+.sfb_flap_bottom {
+  bottom: 0;
+  border-radius: 0 0 var(--sfb-radius, 5px) var(--sfb-radius, 5px);
+}
+
+.sfb_flap {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+.sfb_flap_top {
+  transform-origin: 50% 100%;
+}
+
+.sfb_flap_bottom {
+  transform-origin: 50% 0%;
+}
+
+/* The falling top flap throws a shadow onto the bottom half; the landing
+   flap catches the light as it rebounds. */
+.sfb_shade,
+.sfb_glint {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sfb_shade {
+  background: #000000;
+}
+
+.sfb_glint {
+  background: #ffffff;
+}
+
+.sfb_char {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--sfb-tile-h, 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--sfb-font, 46px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--sfb-fg, #f6f4f0);
+  font-variant-numeric: tabular-nums;
+}
+
+.sfb_char_top {
+  top: 0;
+}
+
+.sfb_char_bottom {
+  top: calc(var(--sfb-tile-h, 76px) * -0.5 - 1px);
+}
+
+.sfb_pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sfb_arrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid var(--sfb-line, rgba(26, 29, 41, 0.14));
+  background: transparent;
+  color: #1a1d29;
+  cursor: pointer;
+  transition:
+    background-color 0.35s cubic-bezier(0.3, 0.9, 0.1, 1),
+    color 0.35s cubic-bezier(0.3, 0.9, 0.1, 1),
+    border-color 0.35s cubic-bezier(0.3, 0.9, 0.1, 1);
+}
+
+.sfb_arrow:hover {
+  background: #1a1d29;
+  border-color: #1a1d29;
+  color: #f6f4f0;
+}
+
+.sfb_arrow:focus-visible {
+  outline: 1px solid var(--sfb-focus, rgba(26, 29, 41, 0.3));
+  outline-offset: 2px;
+}
+
+.sfb_arrow_icon {
+  position: relative;
+  display: block;
+  width: 16px;
+  height: 16px;
+}
+
+.sfb_live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
